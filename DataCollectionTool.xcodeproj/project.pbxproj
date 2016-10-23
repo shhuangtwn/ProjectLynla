@@ -17,6 +17,7 @@
 		753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A578B1D991C8B001A087E /* LaunchScreen.storyboard */; };
 		754847CE1DB934180030E9B0 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 754847CD1DB934170030E9B0 /* check.png */; };
 		754847D01DB9FC030030E9B0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 754847CF1DB9FC010030E9B0 /* .gitignore */; };
+		754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */; };
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
@@ -47,6 +48,7 @@
 		753A578E1D991C8B001A087E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		754847CD1DB934170030E9B0 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		754847CF1DB9FC010030E9B0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				75EEDD5F1DAF99D6004D4D99 /* PresentItemViewController.swift */,
 				75EEDD611DB0D118004D4D99 /* CameraViewController.swift */,
 				75F6970B1DB752CB00CB766E /* AnalyzingViewController.swift */,
+				754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */,
 			);
 			path = DataCollectionTool;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				75F6970C1DB752CB00CB766E /* AnalyzingViewController.swift in Sources */,
 				753A57881D991C8B001A087E /* DataCollectionTool.xcdatamodeld in Sources */,
+				754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */,
 				75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */,
 				75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */,
 				753445681DA6482C00827449 /* ListTableViewController.swift in Sources */,
