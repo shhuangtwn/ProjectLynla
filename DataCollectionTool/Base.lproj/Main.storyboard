@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rvr-jR-6HF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UUa-iI-56r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -655,6 +655,15 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="p0t-mH-sUP">
+                                <rect key="frame" x="18" y="291" width="564" height="31"/>
+                                <color key="minimumTrackTintColor" red="0.26274509800000001" green="0.3411764706" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="maximumTrackTintColor" red="0.92941176469999998" green="0.37647058820000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="testSliderAction:" destination="UUa-iI-56r" eventType="valueChanged" id="ZkN-pd-vr7"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -666,8 +675,11 @@
                             <constraint firstItem="mHP-is-lmy" firstAttribute="leading" secondItem="YRU-4G-SoC" secondAttribute="leading" id="M5H-KR-vux"/>
                             <constraint firstAttribute="bottom" secondItem="8bx-gN-Xgd" secondAttribute="bottom" constant="5" id="RG9-o8-kUd"/>
                             <constraint firstItem="izm-GB-kt1" firstAttribute="centerX" secondItem="YRU-4G-SoC" secondAttribute="centerX" id="UC3-pO-d8C"/>
+                            <constraint firstItem="p0t-mH-sUP" firstAttribute="leading" secondItem="YRU-4G-SoC" secondAttribute="leadingMargin" id="WgY-xs-0Dp"/>
                             <constraint firstItem="rtX-MS-6Lv" firstAttribute="leading" secondItem="YRU-4G-SoC" secondAttribute="leadingMargin" constant="5" id="ajk-ww-mZF"/>
                             <constraint firstItem="8bx-gN-Xgd" firstAttribute="trailing" secondItem="izm-GB-kt1" secondAttribute="trailing" id="dtd-bf-XJR"/>
+                            <constraint firstItem="p0t-mH-sUP" firstAttribute="centerX" secondItem="rtX-MS-6Lv" secondAttribute="centerX" id="fip-wb-NLo"/>
+                            <constraint firstItem="rtX-MS-6Lv" firstAttribute="top" secondItem="p0t-mH-sUP" secondAttribute="bottom" constant="45" id="lBQ-oO-5Ej"/>
                             <constraint firstAttribute="trailing" secondItem="mHP-is-lmy" secondAttribute="trailing" id="mR6-yg-KFm"/>
                             <constraint firstItem="rtX-MS-6Lv" firstAttribute="top" secondItem="mHP-is-lmy" secondAttribute="bottom" constant="54" id="nSI-PK-eea"/>
                             <constraint firstItem="mHP-is-lmy" firstAttribute="top" secondItem="YRU-4G-SoC" secondAttribute="top" id="xB7-1c-Xii"/>
@@ -692,6 +704,7 @@
                         <outlet property="ratedTimesLabel" destination="Z73-f5-IeF" id="abH-zg-I53"/>
                         <outlet property="ratingSegmentor" destination="wNs-sk-vcy" id="pAl-dh-9Oc"/>
                         <outlet property="saveButton" destination="izm-GB-kt1" id="kfD-8f-9Lx"/>
+                        <outlet property="testSlider" destination="p0t-mH-sUP" id="8JF-wD-Ce4"/>
                         <outlet property="textureSegmentor" destination="Q7Y-cb-Qpc" id="YCb-u4-not"/>
                     </connections>
                 </viewController>

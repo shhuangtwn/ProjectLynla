@@ -20,6 +20,14 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         case existingItem
     }
     
+    @IBAction func testSliderAction(sender: UISlider) {
+        
+        let step: Float = 1
+        let roundedValue = round(sender.value / step) * step
+        sender.value = roundedValue
+        
+    }
+    
     @IBOutlet weak var avgFlavorLabel: UILabel!
     @IBOutlet weak var avgTextureLabel: UILabel!
     @IBOutlet weak var avgPointsLabel: UILabel!
@@ -28,6 +36,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var testSlider: UISlider!
     
     var receivedBarCode: String = ""
     var receivedItemImageData = NSData()
@@ -90,9 +99,6 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Get userUID
-        
-        self.navigationController?.navigationBar.hidden = true
-        
         let defaults = NSUserDefaults.standardUserDefaults()
         if let uuid = defaults.stringForKey("userUID") {
             self.userUID = uuid
@@ -101,6 +107,8 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Set UI
+        self.navigationController?.navigationBar.hidden = true
+        testSlider.hidden = true
         ratingSegmentor.selectedSegmentIndex = (Int(ratedPoints) - 1 )
         flavorSegmentor.selectedSegmentIndex = (Int(ratedTexture) - 1 )
         textureSegmentor.selectedSegmentIndex = (Int(ratedFlavor) - 1 )
