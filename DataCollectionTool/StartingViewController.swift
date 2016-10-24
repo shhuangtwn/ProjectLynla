@@ -10,6 +10,8 @@ import UIKit
 import FBSDKCoreKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseAnalytics
+import Fabric
 import Crashlytics
 
 class StartingViewController: UIViewController {
@@ -35,17 +37,25 @@ class StartingViewController: UIViewController {
     
     override func viewDidLoad() {
     
-        // testing if github set
+        // Set UI
         self.navigationController?.navigationBar.hidden = false
 
+        // The Crashlytics button
         let button = UIButton(type: UIButtonType.RoundedRect)
         button.frame = CGRectMake(20, 80, 100, 30)
         button.setTitle("Crash", forState: UIControlState.Normal)
+        button.tintColor = UIColor.redColor()
         button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(button)
         
         saveUserToNSUserDefaults()
     
+        // FIrebase Analytics Event Log
+        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
+            kFIRParameterContentType:"cont",
+            kFIRParameterItemID:"1"
+            ])
+        
     }
     
     @IBAction func crashButtonTapped(sender: AnyObject) {
@@ -60,6 +70,9 @@ class StartingViewController: UIViewController {
             userDefault.setObject(uid, forKey: "userUID")
             userDefault.synchronize()
             
+            // Log user for Crashlytics
+            self.logUser(uid)
+
         } else {
             // No user is signed in.
         }
@@ -73,10 +86,18 @@ class StartingViewController: UIViewController {
             "name": name,
             "email": email,
             "image": photoUrlString]
-        
+
         postUserRef.setValue(postUserData)
         
     }
+    
+    func logUser(uid: String) {
+        // TODO: Use the current user's information
+        //Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
+        Crashlytics.sharedInstance().setUserIdentifier(uid)
+        //Crashlytics.sharedInstance().setUserName("Test User")
+    }
+
     
 }
 

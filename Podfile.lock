@@ -5,6 +5,10 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Charts/Core (2.3.0)
+  - Charts/Realm (2.3.0):
+    - Charts/Core
+    - RealmSwift (~> 1.1)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.10)
@@ -57,9 +61,15 @@ PODS:
   - GoogleSymbolUtilities (1.1.2)
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
+  - Realm (1.1.0):
+    - Realm/Headers (= 1.1.0)
+  - Realm/Headers (1.1.0)
+  - RealmSwift (1.1.0):
+    - Realm (= 1.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Charts/Realm
   - Crashlytics
   - Fabric
   - FacebookCore (= 0.1.1)
@@ -72,6 +82,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Charts: 55d7fd9af175b500208601bea872f0fc72c1d19e
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   FacebookCore: 14f27add6888c27470d42a100374e6361f4e0f79
@@ -89,8 +100,10 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
+  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
+  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4f0d3c7f878da846508a5f6d8b779f3a091aab03
+PODFILE CHECKSUM: 0a1a07321ea0865c14b1ca83f81403d4fb9b3afe
 
 COCOAPODS: 1.0.1
