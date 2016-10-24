@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
 
         self.navigationController?.navigationBar.hidden = false
 
-     
+        // Get user ID
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
             //let email = user.email
@@ -43,6 +43,8 @@ class ProfileViewController: UIViewController {
         
     
     }
+    
+    
     
     func fetchUserProfile(uid: String) {
     

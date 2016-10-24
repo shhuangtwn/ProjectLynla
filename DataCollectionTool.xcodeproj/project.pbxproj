@@ -21,6 +21,7 @@
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
+		75E208B11DBDAA9700F238DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E208B01DBDAA9700F238DE /* AdSupport.framework */; };
 		75EEDD561DACCFFC004D4D99 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */; };
 		75EEDD571DACCFFC004D4D99 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */; };
 		75EEDD581DACCFFC004D4D99 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD551DACCFFC004D4D99 /* FBSDKShareKit.framework */; };
@@ -52,6 +53,7 @@
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
+		75E208B01DBDAA9700F238DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		75EEDD551DACCFFC004D4D99 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E208B11DBDAA9700F238DE /* AdSupport.framework in Frameworks */,
 				75EEDD581DACCFFC004D4D99 /* FBSDKShareKit.framework in Frameworks */,
 				7E6EA2812833299FD4ECEBB6 /* Pods_DataCollectionTool.framework in Frameworks */,
 				75EEDD561DACCFFC004D4D99 /* FBSDKCoreKit.framework in Frameworks */,
@@ -137,6 +140,7 @@
 		9AFDB69AC9380E088C29C601 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75E208B01DBDAA9700F238DE /* AdSupport.framework */,
 				75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */,
 				75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */,
 				75EEDD551DACCFFC004D4D99 /* FBSDKShareKit.framework */,
@@ -416,6 +420,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -437,6 +443,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

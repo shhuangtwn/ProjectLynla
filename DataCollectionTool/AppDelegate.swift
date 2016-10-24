@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         Fabric.with([Crashlytics.self])
-        
+                
         // Use Firebase library to configure APIs
         FIRApp.configure()
         
