@@ -19,6 +19,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var barChartView: BarChartView!
+    var months: [String]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,9 +45,31 @@ class ProfileViewController: UIViewController {
             // No user is signed in.
         }
         
+        // Set Chart UI
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
+        
+        setChart(months, values: unitsSold)
     
     }
     
+    func setChart(dataPoints: [String], values: [Double]) {
+        barChartView.noDataText = "Calculating..."
+        
+        var dataEntries: [BarChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = BarChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+        let chartDataSet = BarChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let chartData = BarChartData(xVals: months, dataSet: chartDataSet)
+        barChartView.data = chartData
+        chartDataSet.colors = ChartColorTemplates.material()
+        barChartView.xAxis.labelPosition = .Bottom
+        barChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+    }
     
     
     func fetchUserProfile(uid: String) {

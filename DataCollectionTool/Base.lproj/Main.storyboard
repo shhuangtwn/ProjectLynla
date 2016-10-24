@@ -218,7 +218,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Texture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fI-mV-QTG">
-                                                    <rect key="frame" x="76" y="0.0" width="58" height="21"/>
+                                                    <rect key="frame" x="76" y="0.0" width="92" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="3cj-6n-M6m"/>
                                                         <constraint firstAttribute="width" constant="92" id="4CL-Kc-gNO"/>
@@ -228,7 +228,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Flavor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXw-mA-ZqB">
-                                                    <rect key="frame" x="134" y="0.0" width="81" height="21"/>
+                                                    <rect key="frame" x="168" y="0.0" width="47" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="81" id="tSs-nE-gAS"/>
                                                     </constraints>
@@ -369,8 +369,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="508"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gu-hf-0E1">
-                                <rect key="frame" x="20" y="64" width="100" height="70"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4gu-hf-0E1">
+                                <rect key="frame" x="20" y="0.0" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="0V7-K9-CMT"/>
                                     <constraint firstAttribute="width" constant="100" id="60a-UE-8wG"/>
@@ -383,20 +383,27 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Total rated:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWS-DM-Cgy">
-                                <rect key="frame" x="20" y="185" width="87" height="21"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-xr-gbo" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="221" width="600" height="287"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total rated:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWS-DM-Cgy">
+                                <rect key="frame" x="20" y="116" width="87" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="in5-n3-ohE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Avg Flavor:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-gt-sdf">
-                                <rect key="frame" x="20" y="261" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avg Flavor:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-gt-sdf">
+                                <rect key="frame" x="20" y="192" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Avg texture:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzN-xJ-NB7">
-                                <rect key="frame" x="20" y="223" width="92" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avg texture:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzN-xJ-NB7">
+                                <rect key="frame" x="20" y="154" width="92" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -405,22 +412,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4gu-hf-0E1" firstAttribute="top" secondItem="F8B-Gg-hZh" secondAttribute="bottom" id="0vL-Da-EkU"/>
-                            <constraint firstItem="SzN-xJ-NB7" firstAttribute="leading" secondItem="dxD-gt-sdf" secondAttribute="leading" id="7RV-cs-O4a"/>
                             <constraint firstItem="0FV-Da-GHX" firstAttribute="trailing" secondItem="hOI-Du-fSY" secondAttribute="trailingMargin" id="93y-SJ-HY2"/>
+                            <constraint firstItem="dxD-gt-sdf" firstAttribute="top" secondItem="SzN-xJ-NB7" secondAttribute="bottom" constant="17" id="9Ed-IW-sbg"/>
+                            <constraint firstItem="SaF-xr-gbo" firstAttribute="leading" secondItem="hOI-Du-fSY" secondAttribute="leading" id="A8I-Yi-fsf"/>
+                            <constraint firstItem="DWS-DM-Cgy" firstAttribute="top" secondItem="4gu-hf-0E1" secondAttribute="bottom" constant="16" id="DAi-hd-TVS"/>
+                            <constraint firstAttribute="trailing" secondItem="SaF-xr-gbo" secondAttribute="trailing" id="DKE-H0-uFI"/>
+                            <constraint firstItem="SaF-xr-gbo" firstAttribute="bottom" secondItem="jSF-O9-WS2" secondAttribute="top" id="OHt-6V-DDZ"/>
                             <constraint firstItem="4gu-hf-0E1" firstAttribute="top" secondItem="0FV-Da-GHX" secondAttribute="top" constant="-8" id="Pau-u0-J6g"/>
-                            <constraint firstItem="jSF-O9-WS2" firstAttribute="top" secondItem="dxD-gt-sdf" secondAttribute="bottom" constant="318" id="WtZ-Vc-zdD"/>
-                            <constraint firstItem="SzN-xJ-NB7" firstAttribute="top" secondItem="DWS-DM-Cgy" secondAttribute="bottom" constant="17" id="Zn4-eV-NDb"/>
-                            <constraint firstItem="DWS-DM-Cgy" firstAttribute="leading" secondItem="4gu-hf-0E1" secondAttribute="leading" id="ai9-xF-64h"/>
-                            <constraint firstItem="DWS-DM-Cgy" firstAttribute="top" secondItem="4gu-hf-0E1" secondAttribute="bottom" constant="21" id="cxp-He-1wS"/>
-                            <constraint firstItem="dxD-gt-sdf" firstAttribute="top" secondItem="SzN-xJ-NB7" secondAttribute="bottom" constant="17" id="j8K-OH-JlT"/>
+                            <constraint firstItem="SaF-xr-gbo" firstAttribute="top" secondItem="dxD-gt-sdf" secondAttribute="bottom" constant="8" symbolic="YES" id="X30-DI-aN1"/>
+                            <constraint firstItem="SzN-xJ-NB7" firstAttribute="top" secondItem="DWS-DM-Cgy" secondAttribute="bottom" constant="17" id="bie-co-xux"/>
                             <constraint firstItem="4gu-hf-0E1" firstAttribute="leading" secondItem="hOI-Du-fSY" secondAttribute="leadingMargin" id="m0Q-m2-0V7"/>
-                            <constraint firstItem="DWS-DM-Cgy" firstAttribute="leading" secondItem="SzN-xJ-NB7" secondAttribute="leading" id="pkC-zS-85i"/>
                             <constraint firstItem="0FV-Da-GHX" firstAttribute="leading" secondItem="4gu-hf-0E1" secondAttribute="trailing" constant="8" symbolic="YES" id="pmR-Na-alM"/>
+                            <constraint firstItem="dxD-gt-sdf" firstAttribute="leading" secondItem="SzN-xJ-NB7" secondAttribute="leading" id="qyk-0o-RNz"/>
+                            <constraint firstItem="SzN-xJ-NB7" firstAttribute="leading" secondItem="DWS-DM-Cgy" secondAttribute="leading" id="rfn-dD-rXc"/>
+                            <constraint firstItem="DWS-DM-Cgy" firstAttribute="leading" secondItem="4gu-hf-0E1" secondAttribute="leading" id="rte-Yb-R8W"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="avgFlavorLabel" destination="dxD-gt-sdf" id="oFc-GO-oFU"/>
                         <outlet property="avgTextureLabel" destination="SzN-xJ-NB7" id="Lk6-ub-Dym"/>
+                        <outlet property="barChartView" destination="SaF-xr-gbo" id="AS0-Is-RBK"/>
                         <outlet property="nameLabel" destination="0FV-Da-GHX" id="ndd-qG-9KI"/>
                         <outlet property="profileImageView" destination="4gu-hf-0E1" id="doB-0F-gAu"/>
                         <outlet property="totalRatedLabel" destination="DWS-DM-Cgy" id="Drs-au-S9p"/>
