@@ -19,9 +19,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var barChartView: BarChartView!
-    var months: [String]!
+    //@IBOutlet weak var barChartView: BarChartView!
+    var dataValue: [String]!
 
+    @IBOutlet weak var scatterChartView: ScatterChartView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,30 +48,72 @@ class ProfileViewController: UIViewController {
         }
         
         // Set Chart UI
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
-        
-        setChart(months, values: unitsSold)
-    
+//        dataValue = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+//        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
+//        setChart(dataValue, values: unitsSold)
+
+//        let dataPoints = ["1", "2", "3", "4", "5"]
+//        let value1 = [1.0,1.0,1.0,1.2,1.2]
+//        let value2 = [5.2,5.2,5.2,5.2,5.2]
+//        
+//        drawChart(dataPoints, value1: value1, value2: value2)
     }
     
-    func setChart(dataPoints: [String], values: [Double]) {
-        barChartView.noDataText = "Calculating..."
+    func drawChart(dataPoints:[String] , value1 :[Double] , value2:[Double])
+    {
+        var dataEntries1:[ChartDataEntry] = []
         
-        var dataEntries: [BarChartDataEntry] = []
         
-        for i in 0..<dataPoints.count {
-            let dataEntry = BarChartDataEntry(value: values[i], xIndex: i)
-            dataEntries.append(dataEntry)
+        
+        for i in 0..<value1.count {
+            let dataEntry = ChartDataEntry(value:value1[i] , xIndex : i)
+            dataEntries1.append(dataEntry)
         }
         
-        let chartDataSet = BarChartDataSet(yVals: dataEntries, label: "Units Sold")
-        let chartData = BarChartData(xVals: months, dataSet: chartDataSet)
-        barChartView.data = chartData
-        chartDataSet.colors = ChartColorTemplates.material()
-        barChartView.xAxis.labelPosition = .Bottom
-        barChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        var dataEntries2:[ChartDataEntry] = []
+        
+        for i in 0..<value2.count {
+            let dataEntry = ChartDataEntry(value:value2[i] , xIndex : i)
+            dataEntries2.append(dataEntry)
+        }
+        
+        let dataSet1 = ScatterChartDataSet(yVals: dataEntries1, label: "Value1" )
+        dataSet1 .setColor(UIColor.blueColor())
+        let dataSet2 = ScatterChartDataSet(yVals: dataEntries2 ,label: "Value2")
+        dataSet2.setColor(UIColor.greenColor())
+        
+        var bloodPressureDataSets = [ScatterChartDataSet]()
+        bloodPressureDataSets.append(dataSet1)
+        bloodPressureDataSets.append(dataSet2)
+        
+        let barChartData = ScatterChartData(xVals: dataPoints, dataSets: bloodPressureDataSets)
+        
+        scatterChartView.xAxis.labelPosition = .Bottom
+        scatterChartView.rightAxis.enabled = true
+        //barChart.legend.enabled=false
+        scatterChartView.descriptionText=""
+        scatterChartView.data = barChartData
+        
     }
+    
+//    func setChart(dataPoints: [String], values: [Double]) {
+//        scatterChartView.noDataText = "Calculating..."
+//        
+//        var dataEntries: [BarChartDataEntry] = []
+//        
+//        for i in 0..<dataPoints.count {
+//            let dataEntry = BarChartDataEntry(value: values[i], xIndex: i)
+//            dataEntries.append(dataEntry)
+//        }
+//        
+//        let chartDataSet = BarChartDataSet(yVals: dataEntries, label: "Units Sold")
+//        let chartData = BarChartData(xVals: dataValue, dataSet: chartDataSet)
+//        scatterChartView.data = chartData
+//        chartDataSet.colors = ChartColorTemplates.material()
+//        scatterChartView.xAxis.labelPosition = .Bottom
+//        
+//        scatterChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+//    }
     
     
     func fetchUserProfile(uid: String) {

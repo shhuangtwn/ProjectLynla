@@ -49,13 +49,7 @@ class StartingViewController: UIViewController {
         view.addSubview(button)
         
         saveUserToNSUserDefaults()
-    
-        // FIrebase Analytics Event Log
-        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
-            kFIRParameterContentType:"cont",
-            kFIRParameterItemID:"1"
-            ])
-        
+            
     }
     
     @IBAction func crashButtonTapped(sender: AnyObject) {

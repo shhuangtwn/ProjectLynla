@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import FirebaseAnalytics
 
 class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -22,7 +23,11 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set UI
         self.navigationController?.title = "Find the barcode!"
+        
+        // FIrebase Analytics Event Log
+        FIRAnalytics.logEventWithName("entercapture", parameters: ["state": "barcode session"])
         
         // Create a capture session
         captureSession = AVCaptureSession()

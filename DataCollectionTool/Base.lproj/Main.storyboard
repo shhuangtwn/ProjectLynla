@@ -383,7 +383,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-xr-gbo" customClass="BarChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-xr-gbo" customClass="ScatterChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="221" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -431,9 +431,9 @@
                     <connections>
                         <outlet property="avgFlavorLabel" destination="dxD-gt-sdf" id="oFc-GO-oFU"/>
                         <outlet property="avgTextureLabel" destination="SzN-xJ-NB7" id="Lk6-ub-Dym"/>
-                        <outlet property="barChartView" destination="SaF-xr-gbo" id="AS0-Is-RBK"/>
                         <outlet property="nameLabel" destination="0FV-Da-GHX" id="ndd-qG-9KI"/>
                         <outlet property="profileImageView" destination="4gu-hf-0E1" id="doB-0F-gAu"/>
+                        <outlet property="scatterChartView" destination="SaF-xr-gbo" id="Yac-E3-0O8"/>
                         <outlet property="totalRatedLabel" destination="DWS-DM-Cgy" id="Drs-au-S9p"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,7 @@ import SwiftyJSON
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
+import FirebaseAnalytics
 
 class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     
@@ -106,6 +107,9 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
             getUserKey()
         }
         
+        // FIrebase Analytics Event Log
+        FIRAnalytics.logEventWithName("complete capture", parameters: ["state": "item page"])
+        
         // Set UI
         self.navigationController?.navigationBar.hidden = true
         testSlider.hidden = true
@@ -153,8 +157,6 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     
     func postToCloudPressed(sender: UIButton) {
         
-        // TO DO: Need to identify if same item saving
-        
         let databaseRef = FIRDatabase.database().reference()
         let postItemRef = databaseRef.child("items").childByAutoId()
         
@@ -198,6 +200,9 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
                     "user_taken_image": itemImageUrlString]
                 
                 postUserFeedbackRef.setValue(postUFBRatingData)
+                
+                // FIrebase Analytics Event Log
+                FIRAnalytics.logEventWithName("complete saving", parameters: ["state": "feedback saved"])
                 
                 self.alertUserDataAdded()
                 
