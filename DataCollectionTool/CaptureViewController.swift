@@ -27,7 +27,14 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.navigationController?.title = "Find the barcode!"
         
         // FIrebase Analytics Event Log
-        FIRAnalytics.logEventWithName("entercapture", parameters: ["state": "barcode session"])
+        var nameForFIRAnalytics: String = ""
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let username = defaults.stringForKey("username") {
+            nameForFIRAnalytics = username
+        } else {
+            nameForFIRAnalytics = "username_missing"
+        }
+        FIRAnalytics.logEventWithName("enter_capture", parameters: ["username": nameForFIRAnalytics])
         
         // Create a capture session
         captureSession = AVCaptureSession()

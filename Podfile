@@ -17,5 +17,7 @@ pod 'FacebookLogin', '0.1.1'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Charts/Realm'
+pod 'SwiftCharts', '~> 0.4'
+
 
 end

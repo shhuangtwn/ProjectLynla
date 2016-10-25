@@ -66,6 +66,7 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - SwiftCharts (0.4)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - SwiftCharts (~> 0.4)
   - SwiftyJSON (= 2.3.2)
 
 SPEC CHECKSUMS:
@@ -102,8 +104,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  SwiftCharts: 84b43d9d70b791459ff5f50ae5a6704326de309d
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 0a1a07321ea0865c14b1ca83f81403d4fb9b3afe
+PODFILE CHECKSUM: 6983d7a6c6203d235ee6e1bcbfc0e6e725fd6a44
 
 COCOAPODS: 1.0.1

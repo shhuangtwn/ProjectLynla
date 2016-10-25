@@ -108,7 +108,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         }
         
         // FIrebase Analytics Event Log
-        FIRAnalytics.logEventWithName("complete capture", parameters: ["state": "item page"])
+        FIRAnalytics.logEventWithName("complete_analyze", parameters: ["item": receivedLogoText])
         
         // Set UI
         self.navigationController?.navigationBar.hidden = true

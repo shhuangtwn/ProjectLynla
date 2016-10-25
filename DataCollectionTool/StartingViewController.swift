@@ -59,9 +59,11 @@ class StartingViewController: UIViewController {
     func saveUserToNSUserDefaults() {
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid
+            let username = user.displayName
             
             let userDefault = NSUserDefaults.standardUserDefaults()
             userDefault.setObject(uid, forKey: "userUID")
+            userDefault.setObject(username, forKey: "username")
             userDefault.synchronize()
             
             // Log user for Crashlytics

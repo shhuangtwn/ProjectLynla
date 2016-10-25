@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SwiftCharts
 
 class ListTableViewController: UITableViewController {
     
