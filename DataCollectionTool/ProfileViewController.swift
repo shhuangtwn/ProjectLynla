@@ -10,6 +10,91 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Charts
+import SwiftCharts
+
+private enum MyExampleModelDataType {
+    case Type0, Type1, Type2, Type3
+}
+
+private enum Shape {
+    case Triangle, Square, Circle, Cross
+}
+
+class Env {
+    
+    static var iPad: Bool {
+        return UIDevice.currentDevice().userInterfaceIdiom == .Pad
+    }
+}
+
+struct ExamplesDefaults {
+    
+    static var chartSettings: ChartSettings {
+        if Env.iPad {
+            return self.iPadChartSettings
+        } else {
+            return self.iPhoneChartSettings
+        }
+    }
+    
+    private static var iPadChartSettings: ChartSettings {
+        let chartSettings = ChartSettings()
+        chartSettings.leading = 20
+        chartSettings.top = 20
+        chartSettings.trailing = 20
+        chartSettings.bottom = 20
+        chartSettings.labelsToAxisSpacingX = 10
+        chartSettings.labelsToAxisSpacingY = 10
+        chartSettings.axisTitleLabelsToLabelsSpacing = 5
+        chartSettings.axisStrokeWidth = 1
+        chartSettings.spacingBetweenAxesX = 15
+        chartSettings.spacingBetweenAxesY = 15
+        return chartSettings
+    }
+    
+    private static var iPhoneChartSettings: ChartSettings {
+        let chartSettings = ChartSettings()
+        chartSettings.leading = 10
+        chartSettings.top = 10
+        chartSettings.trailing = 10
+        chartSettings.bottom = 10
+        chartSettings.labelsToAxisSpacingX = 5
+        chartSettings.labelsToAxisSpacingY = 5
+        chartSettings.axisTitleLabelsToLabelsSpacing = 4
+        chartSettings.axisStrokeWidth = 0.2
+        chartSettings.spacingBetweenAxesX = 8
+        chartSettings.spacingBetweenAxesY = 8
+        return chartSettings
+    }
+    
+    static func chartFrame(containerBounds: CGRect) -> CGRect {
+        return CGRectMake(0, 70, containerBounds.size.width, containerBounds.size.height - 70)
+    }
+    
+    static var labelSettings: ChartLabelSettings {
+        return ChartLabelSettings(font: ExamplesDefaults.labelFont)
+    }
+    
+    static var labelFont: UIFont {
+        return ExamplesDefaults.fontWithSize(Env.iPad ? 14 : 11)
+    }
+    
+    static var labelFontSmall: UIFont {
+        return ExamplesDefaults.fontWithSize(Env.iPad ? 12 : 10)
+    }
+    
+    static func fontWithSize(size: CGFloat) -> UIFont {
+        return UIFont(name: "Helvetica", size: size) ?? UIFont.systemFontOfSize(size)
+    }
+    
+    static var guidelinesWidth: CGFloat {
+        return Env.iPad ? 0.5 : 0.1
+    }
+    
+    static var minBarSpacing: CGFloat {
+        return Env.iPad ? 10 : 5
+    }
+}
 
 class ProfileViewController: UIViewController {
 
@@ -19,17 +104,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    //@IBOutlet weak var barChartView: BarChartView!
-    var dataValue: [String]!
-
-    @IBOutlet weak var scatterChartView: ScatterChartView!
     
+    @IBOutlet weak var scatterChartView: UIView!
+    private var chart: Chart?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.hidden = false
 
-        // Get user ID
+        // Get user data
         if let user = FIRAuth.auth()?.currentUser {
             let name = user.displayName
             //let email = user.email
@@ -47,73 +131,88 @@ class ProfileViewController: UIViewController {
             // No user is signed in.
         }
         
+        
         // Set Chart UI
-//        dataValue = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-//        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
-//        setChart(dataValue, values: unitsSold)
+        let labelSettings = ChartLabelSettings(font: ExamplesDefaults.labelFont)
+        
+        let models: [(x: Double, y: Double, type: MyExampleModelDataType)] = [
+            (246.56, 138.98, .Type1), (218.33, 132.71, .Type0),  (171.75, 135.92, .Type1), (236.93, 117.1, .Type2), (201.97, 135, .Type3), (265.41, 80.62, .Type3), (312.42, 96.21, .Type1), (232, 141.18, .Type0), (348.75, 132.65, .Type1),  (344.74, 136.65, .Type0)
+        ]
+        
+        let layerSpecifications: [MyExampleModelDataType : (shape: Shape, color: UIColor)] = [
+            .Type0 : (.Triangle, UIColor.redColor()),
+            .Type1 : (.Square, UIColor.blueColor()),
+            .Type2 : (.Circle, UIColor.greenColor()),
+            .Type3 : (.Cross, UIColor.blackColor())
+        ]
+        
+        let xValues = 0.stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
+        let yValues = 0.stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
+        
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Texture", settings: labelSettings))
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Flavor", settings: labelSettings.defaultVertical()))
+        
+        let chartFrame = ExamplesDefaults.chartFrame(self.view.bounds)
+        let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: ExamplesDefaults.chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
+        let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
+        
+        let scatterLayers = self.toLayers(models, layerSpecifications: layerSpecifications, xAxis: xAxis, yAxis: yAxis, chartInnerFrame: innerFrame)
+        
+        let guidelinesLayerSettings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.blackColor(), linesWidth: ExamplesDefaults.guidelinesWidth)
+        let guidelinesLayer = ChartGuideLinesDottedLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, settings: guidelinesLayerSettings)
+        
+        let chart = Chart(
+            frame: chartFrame,
+            layers: [
+                xAxis,
+                yAxis,
+                guidelinesLayer
+                ] + scatterLayers
+        )
+        
+        self.scatterChartView = chart.view
+        self.view.addSubview(chart.view)
+        self.chart = chart
+        
+        
+    }
+    
+    private func toLayers(models: [(x: Double, y: Double, type: MyExampleModelDataType)], layerSpecifications: [MyExampleModelDataType : (shape: Shape, color: UIColor)], xAxis: ChartAxisLayer, yAxis: ChartAxisLayer, chartInnerFrame: CGRect) -> [ChartLayer] {
+        
+        // group chartpoints by type
+        var groupedChartPoints: Dictionary<MyExampleModelDataType, [ChartPoint]> = [:]
+        for model in models {
+            let chartPoint = ChartPoint(x: ChartAxisValueDouble(model.x), y: ChartAxisValueDouble(model.y))
+            if groupedChartPoints[model.type] != nil {
+                groupedChartPoints[model.type]!.append(chartPoint)
+                
+            } else {
+                groupedChartPoints[model.type] = [chartPoint]
+            }
+        }
+        
+        // create layer for each group
+        let dim: CGFloat = Env.iPad ? 14 : 7
+        let size = CGSizeMake(dim, dim)
+        let layers: [ChartLayer] = groupedChartPoints.map {(type, chartPoints) in
+            let layerSpecification = layerSpecifications[type]!
+            switch layerSpecification.shape {
+            case .Triangle:
+                return ChartPointsScatterTrianglesLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: chartInnerFrame, chartPoints: chartPoints, itemSize: size, itemFillColor: layerSpecification.color)
+            case .Square:
+                return ChartPointsScatterSquaresLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: chartInnerFrame, chartPoints: chartPoints, itemSize: size, itemFillColor: layerSpecification.color)
+            case .Circle:
+                return ChartPointsScatterCirclesLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: chartInnerFrame, chartPoints: chartPoints, itemSize: size, itemFillColor: layerSpecification.color)
+            case .Cross:
+                return ChartPointsScatterCrossesLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: chartInnerFrame, chartPoints: chartPoints, itemSize: size, itemFillColor: layerSpecification.color)
+            }
+        }
+        
+        return layers
+    }
 
-//        let dataPoints = ["1", "2", "3", "4", "5"]
-//        let value1 = [1.0,1.0,1.0,1.2,1.2]
-//        let value2 = [5.2,5.2,5.2,5.2,5.2]
-//        
-//        drawChart(dataPoints, value1: value1, value2: value2)
-    }
     
-    func drawChart(dataPoints:[String] , value1 :[Double] , value2:[Double])
-    {
-        var dataEntries1:[ChartDataEntry] = []
-        
-        
-        
-        for i in 0..<value1.count {
-            let dataEntry = ChartDataEntry(value:value1[i] , xIndex : i)
-            dataEntries1.append(dataEntry)
-        }
-        
-        var dataEntries2:[ChartDataEntry] = []
-        
-        for i in 0..<value2.count {
-            let dataEntry = ChartDataEntry(value:value2[i] , xIndex : i)
-            dataEntries2.append(dataEntry)
-        }
-        
-        let dataSet1 = ScatterChartDataSet(yVals: dataEntries1, label: "Value1" )
-        dataSet1 .setColor(UIColor.blueColor())
-        let dataSet2 = ScatterChartDataSet(yVals: dataEntries2 ,label: "Value2")
-        dataSet2.setColor(UIColor.greenColor())
-        
-        var bloodPressureDataSets = [ScatterChartDataSet]()
-        bloodPressureDataSets.append(dataSet1)
-        bloodPressureDataSets.append(dataSet2)
-        
-        let barChartData = ScatterChartData(xVals: dataPoints, dataSets: bloodPressureDataSets)
-        
-        scatterChartView.xAxis.labelPosition = .Bottom
-        scatterChartView.rightAxis.enabled = true
-        //barChart.legend.enabled=false
-        scatterChartView.descriptionText=""
-        scatterChartView.data = barChartData
-        
-    }
     
-//    func setChart(dataPoints: [String], values: [Double]) {
-//        scatterChartView.noDataText = "Calculating..."
-//        
-//        var dataEntries: [BarChartDataEntry] = []
-//        
-//        for i in 0..<dataPoints.count {
-//            let dataEntry = BarChartDataEntry(value: values[i], xIndex: i)
-//            dataEntries.append(dataEntry)
-//        }
-//        
-//        let chartDataSet = BarChartDataSet(yVals: dataEntries, label: "Units Sold")
-//        let chartData = BarChartData(xVals: dataValue, dataSet: chartDataSet)
-//        scatterChartView.data = chartData
-//        chartDataSet.colors = ChartColorTemplates.material()
-//        scatterChartView.xAxis.labelPosition = .Bottom
-//        
-//        scatterChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
-//    }
     
     
     func fetchUserProfile(uid: String) {

@@ -22,11 +22,11 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set UI
         self.navigationController?.navigationBar.hidden = false
         
         getUserKey()
         fetchItems()
-        
         
     }
     
@@ -37,8 +37,6 @@ class ListTableViewController: UITableViewController {
         // Get user drank items
         database.child("user_feedbacks").queryOrderedByChild("user_uid").queryEqualToValue(userUID).observeEventType(.ChildAdded , withBlock: { snapshot in
             
-//            print(snapshot.value)
-            
             guard
                 let itemUID = snapshot.value!["item_uid"] as? String,
                 let itemPT = snapshot.value!["points"] as? Double,
@@ -47,14 +45,6 @@ class ListTableViewController: UITableViewController {
                 let itemIMG = snapshot.value!["user_taken_image"] as? String
                 else {return}
             
-//            print(itemUID)
-//            print(itemPT)
-//            print(itemTX)
-//            print(itemFL)
-//            print(itemIMG)
-            
-            
-            
             // Get each item details
             database.child("items").child(itemUID).observeSingleEventOfType(.Value , withBlock: { snapshot in
     
@@ -62,9 +52,6 @@ class ListTableViewController: UITableViewController {
                 
                 guard let name = snapshot.value!["name"] as? String else {return}
                 let imageURL = NSURL(string: itemIMG)
-//                let imageData = NSData(contentsOfURL: imageURL!)
-                
-                print("in name?:\(name)")
                 
                 //Firebase was written in async
                 database.child("barcodes").queryOrderedByValue().queryEqualToValue(itemUID).observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
