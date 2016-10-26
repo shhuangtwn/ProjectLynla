@@ -299,7 +299,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLw-bC-CpU">
                                 <rect key="frame" x="0.0" y="92" width="600" height="508"/>
                                 <connections>
-                                    <segue destination="V8P-B8-36T" kind="embed" id="vJq-uU-4nJ"/>
+                                    <segue destination="V8P-B8-36T" kind="embed" identifier="embedToProfile" id="vJq-uU-4nJ"/>
                                 </connections>
                             </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FJc-sd-oxe">
@@ -315,7 +315,7 @@
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-3W-Y81">
                                 <rect key="frame" x="0.0" y="92" width="600" height="508"/>
                                 <connections>
-                                    <segue destination="1vc-t7-vFP" kind="embed" id="6cy-DX-hrk"/>
+                                    <segue destination="1vc-t7-vFP" kind="embed" identifier="embedToList" id="6cy-DX-hrk"/>
                                 </connections>
                             </containerView>
                         </subviews>

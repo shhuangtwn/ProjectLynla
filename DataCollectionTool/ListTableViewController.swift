@@ -13,6 +13,7 @@ import SwiftCharts
 
 class ListTableViewController: UITableViewController {
     
+    // ContainerViewController.sharedInstance.items //
     var items = [ItemModel]()
     var userUID: String = ""
     var ratedItems: Int = 0
@@ -24,96 +25,15 @@ class ListTableViewController: UITableViewController {
         
         // Set UI
         self.navigationController?.navigationBar.hidden = false
-        
-        getUserKey()
-        fetchItems()
-        
-    }
-    
-    func fetchItems() {
-        
-        let database = FIRDatabase.database().reference()
-        
-        // Get user drank items
-        database.child("user_feedbacks").queryOrderedByChild("user_uid").queryEqualToValue(userUID).observeEventType(.ChildAdded , withBlock: { snapshot in
-            
-            guard
-                let itemUID = snapshot.value!["item_uid"] as? String,
-                let itemPT = snapshot.value!["points"] as? Double,
-                let itemTX = snapshot.value!["texture_points"] as? Double,
-                let itemFL = snapshot.value!["flavor_points"] as? Double,
-                let itemIMG = snapshot.value!["user_taken_image"] as? String
-                else {return}
-            
-            // Get each item details
-            database.child("items").child(itemUID).observeSingleEventOfType(.Value , withBlock: { snapshot in
-    
-                print(snapshot)
-                
-                guard let name = snapshot.value!["name"] as? String else {return}
-                let imageURL = NSURL(string: itemIMG)
-                
-                //Firebase was written in async
-                database.child("barcodes").queryOrderedByValue().queryEqualToValue(itemUID).observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
-                    
-                    let barcode = snapshot.key
-                    
-                    print(barcode)
-                    print("-----------------------------")
-                    
-                    let item = ItemModel(name: name, barcode: barcode, imageURL: imageURL!, itemPT: itemPT, itemTX: itemTX, itemFL: itemFL)
-                    self.items.append(item)
-                
-                    self.totalTexturePoints = self.totalTexturePoints + itemTX
-                    self.totalFlavorPoints = self.totalFlavorPoints + itemFL
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                        self.ratedItems = self.items.count
-                        self.tableView.reloadData()
-                        self.uploadAverageData(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
+     
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ListTableViewController.loadList(_:)),name:"reloadList", object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList",name:"reloadList", object: nil)
 
-                    })
-                    
-                })
-                
-            })
-            
-        })
-        
     }
     
-        
-    func getUserKey() {
-        if let user = FIRAuth.auth()?.currentUser {
-            //            let name = user.displayName
-            //            let email = user.email
-            //            let photoUrl = user.photoURL
-            self.userUID = user.uid;  // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with
-            // your backend server, if you have one. Use
-            // getTokenWithCompletion:completion: instead.
-        } else {
-            // No user is signed in.
-            self.userUID = "user UID missing"
-        }
-    }
-    
-    func uploadAverageData(ttlRated: Int, ttlTX: Double, ttlFL: Double) {
-    
-        let avgTX = ttlTX / Double(ttlRated)
-        let avgFL = ttlFL / Double(ttlRated)
-        
-        let databaseRef = FIRDatabase.database().reference()
-        let postCalculatedRef = databaseRef.child("users").child(userUID)
-        
-        let postCalculatedData: [String: AnyObject] = [
-            "total_items": ttlRated,
-            "avg_texture": avgTX,
-            "avg_flavor": avgFL
-            ]
-        
-        postCalculatedRef.setValue(postCalculatedData)
+    func loadList(notification: NSNotification){
+        //load data here
+        self.tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
