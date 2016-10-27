@@ -16,7 +16,7 @@ class Env {
     }
 }
 
-struct ExamplesDefaults {
+struct ChartDefaults {
     
     static var chartSettings: ChartSettings {
         if Env.iPad {
@@ -57,19 +57,20 @@ struct ExamplesDefaults {
     }
     
     static func chartFrame(containerBounds: CGRect) -> CGRect {
-        return CGRectMake(0, 70, containerBounds.size.width, containerBounds.size.height - 70)
+        return CGRectMake(0, 70, containerBounds.size.width - 230, containerBounds.size.height)
+        
     }
     
     static var labelSettings: ChartLabelSettings {
-        return ChartLabelSettings(font: ExamplesDefaults.labelFont)
+        return ChartLabelSettings(font: ChartDefaults.labelFont)
     }
     
     static var labelFont: UIFont {
-        return ExamplesDefaults.fontWithSize(Env.iPad ? 14 : 11)
+        return ChartDefaults.fontWithSize(Env.iPad ? 14 : 11)
     }
     
     static var labelFontSmall: UIFont {
-        return ExamplesDefaults.fontWithSize(Env.iPad ? 12 : 10)
+        return ChartDefaults.fontWithSize(Env.iPad ? 12 : 10)
     }
     
     static func fontWithSize(size: CGFloat) -> UIFont {

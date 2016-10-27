@@ -19,6 +19,7 @@
 		754847D01DB9FC030030E9B0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 754847CF1DB9FC010030E9B0 /* .gitignore */; };
 		754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */; };
 		7593BE271DC05385003C7C74 /* ChartSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593BE261DC05385003C7C74 /* ChartSetting.swift */; };
+		7593BE291DC0B13F003C7C74 /* BubbleGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */; };
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
@@ -52,6 +53,7 @@
 		754847CF1DB9FC010030E9B0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		7593BE261DC05385003C7C74 /* ChartSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSetting.swift; sourceTree = "<group>"; };
+		7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGraph.swift; sourceTree = "<group>"; };
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				75F6970B1DB752CB00CB766E /* AnalyzingViewController.swift */,
 				754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */,
 				7593BE261DC05385003C7C74 /* ChartSetting.swift */,
+				7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */,
 			);
 			path = DataCollectionTool;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				75EEDD621DB0D118004D4D99 /* CameraViewController.swift in Sources */,
 				75EEDD5A1DACD5FE004D4D99 /* LoginViewController.swift in Sources */,
 				753A57801D991C8B001A087E /* AppDelegate.swift in Sources */,
+				7593BE291DC0B13F003C7C74 /* BubbleGraph.swift in Sources */,
 				75EEDD5C1DACE25A004D4D99 /* ProfileViewController.swift in Sources */,
 				7593BE271DC05385003C7C74 /* ChartSetting.swift in Sources */,
 				7534456C1DA7A46900827449 /* ItemDataModel.swift in Sources */,

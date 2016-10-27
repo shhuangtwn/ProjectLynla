@@ -122,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="1612" y="468"/>
         </scene>
-        <!--Bar Code View Controller-->
+        <!--Bubble Example-->
         <scene sceneID="MQN-Sk-1EH">
             <objects>
-                <viewController id="LjY-ci-dN2" customClass="BarCodeViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LjY-ci-dN2" customClass="BubbleExample" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SWO-Zb-g3w"/>
                         <viewControllerLayoutGuide type="bottom" id="rlJ-JB-G1h"/>
@@ -133,8 +133,23 @@
                     <view key="view" contentMode="scaleToFill" id="unH-Bk-Hub">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndT-wi-tfh">
+                                <rect key="frame" x="20" y="197" width="560" height="393"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ndT-wi-tfh" firstAttribute="leading" secondItem="unH-Bk-Hub" secondAttribute="leadingMargin" id="YSH-lv-Q6f"/>
+                            <constraint firstAttribute="bottom" secondItem="ndT-wi-tfh" secondAttribute="bottom" constant="10" id="hLh-qi-G4y"/>
+                            <constraint firstItem="ndT-wi-tfh" firstAttribute="trailing" secondItem="unH-Bk-Hub" secondAttribute="trailingMargin" id="inH-D8-Jwh"/>
+                            <constraint firstItem="ndT-wi-tfh" firstAttribute="top" secondItem="SWO-Zb-g3w" secondAttribute="bottom" constant="177" id="xiI-rL-yd3"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bubbleView" destination="ndT-wi-tfh" id="uOK-Od-k4F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Yo-4Y-mR7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

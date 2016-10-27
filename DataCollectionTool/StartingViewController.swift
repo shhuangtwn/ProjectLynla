@@ -10,7 +10,6 @@ import UIKit
 import FBSDKCoreKit
 import FirebaseAuth
 import FirebaseDatabase
-import FirebaseAnalytics
 import Fabric
 import Crashlytics
 

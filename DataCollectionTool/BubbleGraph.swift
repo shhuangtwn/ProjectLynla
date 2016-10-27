@@ -1,41 +1,19 @@
 //
-//  ProfileViewController.swift
-//  DataCollectionTool
+//  ScatterExample.swift
+//  Examples
 //
-//  Created by Bryan Huang on 2016/10/11.
-//  Copyright © 2016年 Steven Hunag. All rights reserved.
+//  Created by ischuetz on 16/05/15.
+//  Copyright (c) 2015 ivanschuetz. All rights reserved.
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
-import Charts
+import CoreGraphics
 import SwiftCharts
 
-private enum MyExampleModelDataType {
-    case Type0, Type1, Type2, Type3
-}
-
-private enum Shape {
-    case Triangle, Square, Circle, Cross
-}
-
-
-class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var totalRatedLabel: UILabel!
-    @IBOutlet weak var avgFlavorLabel: UILabel!
-    @IBOutlet weak var avgTextureLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+class BubbleExample: UIViewController {
     
-//    var receivedTTL: Int = 0
-//    var receivedTX: Double = 0.0
-//    var receivedFL: Double = 0.0
+    @IBOutlet weak var bubbleView: UIView!
     
-    var receivedItemArray = [ItemModel]()
-    
-    @IBOutlet weak var scatterChartView: UIView!
     private var chart: Chart?
     
     private let colorBarHeight: CGFloat = 50
@@ -45,10 +23,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let frame = ChartDefaults.chartFrame(self.scatterChartView.frame)
+        let frame = ChartDefaults.chartFrame(self.bubbleView.frame)
         var chartFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)
         let colorBar = ColorBar(frame: CGRectMake(0, chartFrame.origin.y + chartFrame.size.height, self.view.frame.size.width, self.colorBarHeight), c1: UIColor.redColor(), c2: UIColor.greenColor())
-        //        self.view.addSubview(colorBar)
+//        self.view.addSubview(colorBar)
         
         
         let labelSettings = ChartLabelSettings(font: ChartDefaults.labelFont)
@@ -62,13 +40,13 @@ class ProfileViewController: UIViewController {
             (2.1, 5, 250, toColor(0)),
             (4, 4, 200, toColor(0.2)),
             (2.3, 5, 150, toColor(0.7)),
-            
+           
             (2, 4.5, 80, toColor(0.7)),
             (1, 5.2, 50, toColor(0.4)),
             (2, 4, 100, toColor(0.3)),
             (2.7, 5.5, 200, toColor(0.5)),
             (5, 2.8, 150, toColor(0.7))
-        ]
+            ]
         
         let chartPoints: [ChartPointBubble] = rawData.map{ChartPointBubble(x: ChartAxisValueDouble($0, labelSettings: labelSettings), y: ChartAxisValueDouble($1), diameterScalar: $2, bgColor: $3)}
         
@@ -100,8 +78,8 @@ class ProfileViewController: UIViewController {
             ]
         )
         
-        self.scatterChartView.addSubview(chart.view)
-        //        self.view.addSubview(chart.view)
+        self.bubbleView.addSubview(chart.view)
+//        self.view.addSubview(chart.view)
         self.chart = chart
     }
     
@@ -234,34 +212,4 @@ class ProfileViewController: UIViewController {
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
-    
-    func fetchUserProfile(uid: String) {
-    
-        let databaseRef = FIRDatabase.database().reference()
-        databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
-            
-            guard let users = snapshot.value as? NSDictionary else{
-                fatalError("not NSDictionary")
-            }
-        
-            guard let userDict = users.valueForKey(uid) as? NSDictionary else {
-                fatalError("not key:[Dict]")
-            }
-            
-            guard
-            let totalItems = userDict.valueForKey("total_items") as? Int,
-            let avgTexture = userDict.valueForKey("avg_texture") as? Double,
-            let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
-                else {return}
-            
-            self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
-            self.avgTextureLabel.text = "Avg. Texture: \(String(avgTexture))"
-            self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
-            
-        })
-
-    
-    }
-    
 }

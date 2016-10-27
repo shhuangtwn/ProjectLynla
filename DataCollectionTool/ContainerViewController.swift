@@ -120,6 +120,7 @@ class ContainerViewController: UIViewController {
     
         //self.performSegueWithIdentifier("embedToList", sender: nil)
         self.destinationListVC.items = self.items
+        self.destinationProfileVC.receivedItemArray = self.items
         NSNotificationCenter.defaultCenter().postNotificationName("reloadList", object: nil)
     
     }

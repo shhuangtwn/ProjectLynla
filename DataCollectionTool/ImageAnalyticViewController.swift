@@ -202,7 +202,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
                 postUserFeedbackRef.setValue(postUFBRatingData)
                 
                 // FIrebase Analytics Event Log
-                FIRAnalytics.logEventWithName("complete saving", parameters: ["state": "feedback saved"])
+                FIRAnalytics.logEventWithName("complete_saving", parameters: ["state": "feedback saved"])
                 
                 self.alertUserDataAdded()
                 
