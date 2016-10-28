@@ -57,6 +57,11 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set UI
+        self.containerProfile.layer.shadowColor = UIColor.blackColor().CGColor
+        self.containerProfile.layer.shadowOffset = CGSizeMake(0, -1)
+        self.containerProfile.layer.shadowOpacity = 0.5
+        
         getUserKey()
         fetchItems()
     
