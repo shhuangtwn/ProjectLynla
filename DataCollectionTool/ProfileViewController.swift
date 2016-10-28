@@ -9,46 +9,54 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
-import Charts
 import SwiftCharts
-
-private enum MyExampleModelDataType {
-    case Type0, Type1, Type2, Type3
-}
-
-private enum Shape {
-    case Triangle, Square, Circle, Cross
-}
 
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var totalRatedLabel: UILabel!
     @IBOutlet weak var avgFlavorLabel: UILabel!
     @IBOutlet weak var avgTextureLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-//    var receivedTTL: Int = 0
-//    var receivedTX: Double = 0.0
-//    var receivedFL: Double = 0.0
+    @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
+    //    var receivedTTL: Int = 0
+    //    var receivedTX: Double = 0.0
+    //    var receivedFL: Double = 0.0
     
     var receivedItemArray = [ItemModel]()
     
     @IBOutlet weak var scatterChartView: UIView!
     private var chart: Chart?
-    
     private let colorBarHeight: CGFloat = 50
-    
     private let useViewsLayer = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        spinnerUI.hidden = false
+        spinnerUI.startAnimating()
+        
+    }
+    
+    func runBubbleChart(itemArray: [ItemModel]) {
+        
+        spinnerUI.stopAnimating()
+        spinnerUI.hidden = true
+        
         let frame = ChartDefaults.chartFrame(self.scatterChartView.frame)
         var chartFrame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)
-        let colorBar = ColorBar(frame: CGRectMake(0, chartFrame.origin.y + chartFrame.size.height, self.view.frame.size.width, self.colorBarHeight), c1: UIColor.redColor(), c2: UIColor.greenColor())
-        //        self.view.addSubview(colorBar)
+        let colorBar = ColorBar(frame: CGRectMake(0, chartFrame.origin.y + chartFrame.size.height, chartFrame.size.width, self.colorBarHeight), c1: UIColor.redColor(), c2: UIColor.greenColor())
+        //        let colorBar = ColorBar(frame: CGRectMake(0, chartFrame.origin.y + chartFrame.size.height, self.scatterChartView.frame.size.width, self.colorBarHeight), c1: UIColor.redColor(), c2: UIColor.greenColor())
+        //    self.view.addSubview(colorBar)
         
         
         let labelSettings = ChartLabelSettings(font: ChartDefaults.labelFont)
@@ -57,26 +65,23 @@ class ProfileViewController: UIViewController {
             return colorBar.colorForPercentage(percentage).colorWithAlphaComponent(0.6)
         }
         
-        let rawData: [(Double, Double, Double, UIColor)] = [
-            (1, 2, 100, toColor(0)),
-            (2.1, 5, 250, toColor(0)),
-            (4, 4, 200, toColor(0.2)),
-            (2.3, 5, 150, toColor(0.7)),
-            
-            (2, 4.5, 80, toColor(0.7)),
-            (1, 5.2, 50, toColor(0.4)),
-            (2, 4, 100, toColor(0.3)),
-            (2.7, 5.5, 200, toColor(0.5)),
-            (5, 2.8, 150, toColor(0.7))
-        ]
+        var rawData: [(Double, Double, Double, UIColor)] = []
+        
+        for item in itemArray {
+            let colorIndex: Double = (item.itemTX + item.itemFL)/10
+            let itemTuple = (item.itemFL, item.itemTX, item.itemPT, toColor(colorIndex))
+            rawData.append(itemTuple)
+        }
+        
+//        let rawData: [(Double, Double, Double, UIColor)] = [(1, 2, 1, toColor(0)),(2.1, 5, 2, toColor(0)),(4, 4, 3, toColor(0)),(2.3, 5, 4, toColor(0)),(2, 4.5, 5, toColor(0))]
         
         let chartPoints: [ChartPointBubble] = rawData.map{ChartPointBubble(x: ChartAxisValueDouble($0, labelSettings: labelSettings), y: ChartAxisValueDouble($1), diameterScalar: $2, bgColor: $3)}
         
         let xValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         let yValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         
-        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings))
-        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings.defaultVertical()))
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "<< Sweeter                   FLAVOR                    Bitter >>", settings: labelSettings))
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "<< Smoother                   TEXTURE                   Thicker >>", settings: labelSettings.defaultVertical()))
         
         let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: ChartDefaults.chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
         let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
@@ -86,7 +91,7 @@ class ProfileViewController: UIViewController {
         let guidelinesLayerSettings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.blackColor(), linesWidth: ChartDefaults.guidelinesWidth)
         let guidelinesLayer = ChartGuideLinesDottedLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, settings: guidelinesLayerSettings)
         
-        let guidelinesHighlightLayerSettings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.redColor(), linesWidth: 1, dotWidth: 4, dotSpacing: 4)
+        let guidelinesHighlightLayerSettings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.redColor(), linesWidth: 1, dotWidth: 4, dotSpacing: 0)
         let guidelinesHighlightLayer = ChartGuideLinesForValuesDottedLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, settings: guidelinesHighlightLayerSettings, axisValuesX: [ChartAxisValueDouble(3)], axisValuesY: [ChartAxisValueDouble(3)])
         
         let chart = Chart(
@@ -103,13 +108,15 @@ class ProfileViewController: UIViewController {
         self.scatterChartView.addSubview(chart.view)
         //        self.view.addSubview(chart.view)
         self.chart = chart
+        
+        
     }
     
     // We can use a view based layer for easy animation (or interactivity), in which case we use the default chart points layer with a generator to create bubble views.
     // On the other side, if we don't need animation or want a better performance, we use ChartPointsBubbleLayer, which instead of creating views, renders directly to the chart's context.
     private func bubblesLayer(xAxis xAxis: ChartAxisLayer, yAxis: ChartAxisLayer, chartInnerFrame: CGRect, chartPoints: [ChartPointBubble]) -> ChartLayer {
         
-        let maxBubbleDiameter: Double = 60, minBubbleDiameter: Double = 10
+        let maxBubbleDiameter: Double = 150, minBubbleDiameter: Double = 80
         
         if self.useViewsLayer == true {
             
@@ -124,8 +131,8 @@ class ProfileViewController: UIViewController {
                 let diameter = CGFloat(chartPointModel.chartPoint.diameterScalar * diameterFactor)
                 
                 let circleView = ChartPointEllipseView(center: chartPointModel.screenLoc, diameter: diameter)
-                circleView.fillColor = chartPointModel.chartPoint.bgColor
-                circleView.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
+                circleView.fillColor = chartPointModel.chartPoint.bgColor.colorWithAlphaComponent(0.2)
+                circleView.borderColor = UIColor.blackColor().colorWithAlphaComponent(0)
                 circleView.borderWidth = 1
                 circleView.animDelay = Float(chartPointModel.index) * 0.2
                 circleView.animDuration = 1.2
@@ -155,7 +162,10 @@ class ProfileViewController: UIViewController {
             
             let gradient: CAGradientLayer = CAGradientLayer()
             gradient.frame = CGRectMake(0, 0, frame.width, 6)
-            gradient.colors = [UIColor.blueColor().CGColor, UIColor.cyanColor().CGColor, UIColor.yellowColor().CGColor, UIColor.redColor().CGColor]
+            gradient.colors = [UIColor.blueColor().CGColor,
+                               UIColor.cyanColor().CGColor,
+                               UIColor.yellowColor().CGColor,
+                               UIColor.redColor().CGColor]
             gradient.startPoint = CGPointMake(0, 0.5)
             gradient.endPoint = CGPointMake(1.0, 0.5)
             
@@ -237,22 +247,22 @@ class ProfileViewController: UIViewController {
     
     
     func fetchUserProfile(uid: String) {
-    
+        
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
             
             guard let users = snapshot.value as? NSDictionary else{
                 fatalError("not NSDictionary")
             }
-        
+            
             guard let userDict = users.valueForKey(uid) as? NSDictionary else {
                 fatalError("not key:[Dict]")
             }
             
             guard
-            let totalItems = userDict.valueForKey("total_items") as? Int,
-            let avgTexture = userDict.valueForKey("avg_texture") as? Double,
-            let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
+                let totalItems = userDict.valueForKey("total_items") as? Int,
+                let avgTexture = userDict.valueForKey("avg_texture") as? Double,
+                let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
                 else {return}
             
             self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
@@ -260,8 +270,8 @@ class ProfileViewController: UIViewController {
             self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
             
         })
-
-    
+        
+        
     }
     
 }

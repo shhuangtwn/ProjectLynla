@@ -99,20 +99,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 print("user welcome back - do nothing")
                 
-                FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: [
-                    kFIRParameterContentType: "old_user" ,
-                    kFIRParameterItemID: "2" as NSObject
-                    ])
+//                FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: [
+//                    kFIRParameterContentType: "old_user" ,
+//                    kFIRParameterItemID: "2" as NSObject
+//                    ])
                 
             } else {
             
                 self.postUserInitDataToCloud(uid, totalItems: 0, avgPT: 3.0, avgTX: 3.0, avgFL: 3.0)
                 print("new user welcome to Lynla!")
                 
-                FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: [
-                    kFIRParameterContentType: "new_user" ,
-                    kFIRParameterItemID: "1" as NSObject
-                    ])
+//                FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: [
+//                    kFIRParameterContentType: "new_user" ,
+//                    kFIRParameterItemID: "1" as NSObject
+//                    ])
                 
             }
             

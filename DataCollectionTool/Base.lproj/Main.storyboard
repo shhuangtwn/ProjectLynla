@@ -400,7 +400,17 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-xr-gbo">
                                 <rect key="frame" x="0.0" y="221" width="600" height="287"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="F4N-E7-slt">
+                                        <rect key="frame" x="282" y="125" width="37" height="37"/>
+                                        <color key="color" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="F4N-E7-slt" firstAttribute="centerX" secondItem="SaF-xr-gbo" secondAttribute="centerX" id="vXU-D7-5pu"/>
+                                    <constraint firstItem="F4N-E7-slt" firstAttribute="centerY" secondItem="SaF-xr-gbo" secondAttribute="centerY" id="xs2-lE-KKa"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total rated:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWS-DM-Cgy">
                                 <rect key="frame" x="20" y="116" width="87" height="21"/>
@@ -449,6 +459,7 @@
                         <outlet property="nameLabel" destination="0FV-Da-GHX" id="ndd-qG-9KI"/>
                         <outlet property="profileImageView" destination="4gu-hf-0E1" id="doB-0F-gAu"/>
                         <outlet property="scatterChartView" destination="SaF-xr-gbo" id="Ab4-Lt-tac"/>
+                        <outlet property="spinnerUI" destination="F4N-E7-slt" id="CAH-FH-vcX"/>
                         <outlet property="totalRatedLabel" destination="DWS-DM-Cgy" id="Drs-au-S9p"/>
                     </connections>
                 </viewController>
@@ -486,6 +497,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Back to home"/>
                                 <connections>
+                                    <action selector="homeButton:" destination="UUa-iI-56r" eventType="touchUpInside" id="4iP-aB-URf"/>
                                     <segue destination="Prg-l5-WKP" kind="unwind" identifier="segueToHome" unwindAction="cancelToPlayersViewController:" id="3Rl-au-MX4"/>
                                 </connections>
                             </button>
@@ -741,7 +753,7 @@
                         <outlet property="avgTextureLabel" destination="R72-Rx-USX" id="O3d-Ka-KPv"/>
                         <outlet property="barcodeLabel" destination="nfw-ZH-TzN" id="g1Q-ki-Grc"/>
                         <outlet property="flavorSegmentor" destination="RQi-si-HLW" id="MgS-zT-fQP"/>
-                        <outlet property="homeButton" destination="8bx-gN-Xgd" id="rYP-I6-cnY"/>
+                        <outlet property="homeButton" destination="8bx-gN-Xgd" id="agT-fN-0Fo"/>
                         <outlet property="imageView" destination="mHP-is-lmy" id="p9O-zk-CdA"/>
                         <outlet property="logoResults" destination="Kvn-Lh-uJa" id="KVX-L6-j4r"/>
                         <outlet property="logoTextfield" destination="6mq-qS-DOB" id="Zx3-mw-TUi"/>

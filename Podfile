@@ -17,6 +17,6 @@ pod 'FacebookLogin', '0.1.1'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SwiftCharts', '~> 0.4'
-
+pod 'HanekeSwift'
 
 end

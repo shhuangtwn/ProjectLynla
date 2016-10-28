@@ -45,7 +45,7 @@ struct ChartDefaults {
         let chartSettings = ChartSettings()
         chartSettings.leading = 10
         chartSettings.top = 10
-        chartSettings.trailing = 10
+        chartSettings.trailing = 15
         chartSettings.bottom = 10
         chartSettings.labelsToAxisSpacingX = 5
         chartSettings.labelsToAxisSpacingY = 5
@@ -57,7 +57,7 @@ struct ChartDefaults {
     }
     
     static func chartFrame(containerBounds: CGRect) -> CGRect {
-        return CGRectMake(0, 70, containerBounds.size.width - 230, containerBounds.size.height)
+        return CGRectMake(0, 0, containerBounds.size.width, containerBounds.size.height)
         
     }
     

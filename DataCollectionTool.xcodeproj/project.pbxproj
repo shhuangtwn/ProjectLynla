@@ -20,6 +20,8 @@
 		754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */; };
 		7593BE271DC05385003C7C74 /* ChartSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593BE261DC05385003C7C74 /* ChartSetting.swift */; };
 		7593BE291DC0B13F003C7C74 /* BubbleGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */; };
+		7593BE2B1DC32746003C7C74 /* beerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7593BE2A1DC32746003C7C74 /* beerIcon.png */; };
+		7593BE2D1DC3274E003C7C74 /* beerIcon256.png in Resources */ = {isa = PBXBuildFile; fileRef = 7593BE2C1DC3274E003C7C74 /* beerIcon256.png */; };
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
@@ -54,6 +56,8 @@
 		754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		7593BE261DC05385003C7C74 /* ChartSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSetting.swift; sourceTree = "<group>"; };
 		7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGraph.swift; sourceTree = "<group>"; };
+		7593BE2A1DC32746003C7C74 /* beerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerIcon.png; sourceTree = "<group>"; };
+		7593BE2C1DC3274E003C7C74 /* beerIcon256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerIcon256.png; sourceTree = "<group>"; };
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				753A57831D991C8B001A087E /* Main.storyboard */,
 				753A57891D991C8B001A087E /* Assets.xcassets */,
 				754847CD1DB934170030E9B0 /* check.png */,
+				7593BE2A1DC32746003C7C74 /* beerIcon.png */,
+				7593BE2C1DC3274E003C7C74 /* beerIcon256.png */,
 				753A578B1D991C8B001A087E /* LaunchScreen.storyboard */,
 				753A578E1D991C8B001A087E /* Info.plist */,
 				75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */,
@@ -218,11 +224,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7593BE2B1DC32746003C7C74 /* beerIcon.png in Resources */,
 				753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */,
 				754847CE1DB934180030E9B0 /* check.png in Resources */,
 				75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */,
 				753A578A1D991C8B001A087E /* Assets.xcassets in Resources */,
 				754847D01DB9FC030030E9B0 /* .gitignore in Resources */,
+				7593BE2D1DC3274E003C7C74 /* beerIcon256.png in Resources */,
 				753A57851D991C8B001A087E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

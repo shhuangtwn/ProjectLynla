@@ -38,7 +38,9 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var testSlider: UISlider!
-    
+    @IBAction func homeButton(sender: AnyObject) {
+        self.navigationController?.navigationBar.hidden = false
+    }
     var receivedBarCode: String = ""
     var receivedItemImageData = NSData()
     var receivedLogoText: String = ""

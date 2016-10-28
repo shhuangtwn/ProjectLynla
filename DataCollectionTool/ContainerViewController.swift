@@ -15,8 +15,6 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var containerProfile: UIView!
     @IBOutlet weak var containerList: UIView!
     
-    // Define singleton
-    //static let sharedInstance = ContainerViewController()
     var items = [ItemModel]()
     
     var destinationListVC = ListTableViewController()
@@ -30,6 +28,15 @@ class ContainerViewController: UIViewController {
     enum ViewSwitch: Int {
         case profile = 0
         case list = 1
+    }
+    
+    enum TasteType {
+    
+        case sweetAndSmooth
+        case sweetAndThick
+        case bitterAndSmooth
+        case bitterAndThick
+        
     }
     
     @IBAction func viewSwitcher(sender: UISegmentedControl) {
@@ -95,6 +102,7 @@ class ContainerViewController: UIViewController {
                         self.uploadAverageData(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
                         self.notifyToReloadList()
                         self.updateAvgNumbers(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
+                        self.drawGraph(self.items)
                     })
                     
                 })
@@ -110,6 +118,12 @@ class ContainerViewController: UIViewController {
         let avgTX = ttlTX / Double(ttlRated)
         let avgFL = ttlFL / Double(ttlRated)
         
+        let tasteType: TasteType
+        
+        if avgTX <= 2.5 && avgFL <= 2.5 {
+            
+        }
+        
         destinationProfileVC.totalRatedLabel.text = "You Rated \(String(ttlRated))"
         destinationProfileVC.avgTextureLabel.text = "Avg. Texture: \(String(avgTX))"
         destinationProfileVC.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFL))"
@@ -118,11 +132,16 @@ class ContainerViewController: UIViewController {
     
     func notifyToReloadList() {
     
-        //self.performSegueWithIdentifier("embedToList", sender: nil)
         self.destinationListVC.items = self.items
         self.destinationProfileVC.receivedItemArray = self.items
         NSNotificationCenter.defaultCenter().postNotificationName("reloadList", object: nil)
     
+    }
+    
+    func drawGraph(itemArray: [ItemModel]) {
+    
+        destinationProfileVC.runBubbleChart(itemArray)
+
     }
     
     func getUserKey() {

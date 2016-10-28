@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import SwiftCharts
+import Haneke
 
 class ListTableViewController: UITableViewController {
     
@@ -42,6 +43,14 @@ class ListTableViewController: UITableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cellIdentifier = "Cell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,forIndexPath: indexPath) as! ListTableViewCell
+        
+        cell.itemImageView.image = UIImage(named: "beerIcon")
+        
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -53,16 +62,8 @@ class ListTableViewController: UITableViewController {
         cell.itemPoint.text = "PT: \(String(item.itemPT))"
         cell.itemTexture.text = "TX: \(String(item.itemTX))"
         cell.itemFlavor.text = "FL: \(String(item.itemFL))"
-                
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            
-            if let imageData =  NSData(contentsOfURL: item.imageURL) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    cell.itemImageView.image = UIImage(data: imageData)
-                })
-            }
-        }
+        cell.itemImageView.hnk_setImageFromURL(item.imageURL)
+        
         return cell
     }
     

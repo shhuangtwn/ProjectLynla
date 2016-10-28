@@ -57,6 +57,7 @@ PODS:
   - GoogleSymbolUtilities (1.1.2)
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
+  - HanekeSwift (0.10.1)
   - SwiftCharts (0.4)
   - SwiftyJSON (2.3.2)
 
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - HanekeSwift
   - SwiftCharts (~> 0.4)
   - SwiftyJSON (= 2.3.2)
 
@@ -91,9 +93,10 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   SwiftCharts: 84b43d9d70b791459ff5f50ae5a6704326de309d
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4fb13e310689911065009ae37eea59094e491829
+PODFILE CHECKSUM: 09ad30ab173b98b2d1835e124f503f890513e810
 
 COCOAPODS: 1.0.1
