@@ -11,6 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseAnalytics
 import FBSDKLoginKit
+import Crashlytics
 
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
@@ -29,9 +30,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if user != nil {
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let startingViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("NavigationViewController")
+                let profileViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ProfileNavi")
                 
-                self.presentViewController(startingViewController, animated: true, completion: nil)
+                self.presentViewController(profileViewController, animated: true, completion: nil)
                 
             } else {
                 
@@ -69,6 +70,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 //check if first time login -> set initial rating if new
                 self.checkIfNewUserLogin(self.getUserKey())
+                self.saveUserToNSUserDefaults()
 
                 print("logged in firebase: \(user)")
                 
@@ -99,7 +101,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 print("user welcome back - do nothing")
                 
-//                FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: [
+//                FIRAnalyticsl.logEvent(withName: kFIREventLogin, parameters: [
 //                    kFIRParameterContentType: "old_user" ,
 //                    kFIRParameterItemID: "2" as NSObject
 //                    ])
@@ -118,6 +120,32 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         })
     }
+    
+    func saveUserToNSUserDefaults() {
+        if let user = FIRAuth.auth()?.currentUser {
+            let uid = user.uid
+            let username = user.displayName
+            
+            let userDefault = NSUserDefaults.standardUserDefaults()
+            userDefault.setObject(uid, forKey: "userUID")
+            userDefault.setObject(username, forKey: "username")
+            userDefault.synchronize()
+            
+            // Log user for Crashlytics
+            self.logUser(uid)
+            
+        } else {
+            // No user is signed in.
+        }
+    }
+    
+    func logUser(uid: String) {
+        // TODO: Use the current user's information
+        //Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
+        Crashlytics.sharedInstance().setUserIdentifier(uid)
+        //Crashlytics.sharedInstance().setUserName("Test User")
+    }
+
     
     func postUserInitDataToCloud(uid: String, totalItems: Int, avgPT: Double, avgTX: Double, avgFL: Double) {
         let databaseRef = FIRDatabase.database().reference()

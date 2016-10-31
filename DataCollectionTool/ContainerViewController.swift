@@ -9,11 +9,22 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FBSDKLoginKit
 
 class ContainerViewController: UIViewController {
 
     @IBOutlet weak var containerProfile: UIView!
     @IBOutlet weak var containerList: UIView!
+    @IBOutlet weak var scanButton: UIButton!
+    @IBAction func scanButton(sender: UIButton) {
+    
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CaptureView")
+        
+        self.presentViewController(CaptureViewController, animated: true, completion: nil)
+        
+    }
     
     var items = [ItemModel]()
     
@@ -26,8 +37,8 @@ class ContainerViewController: UIViewController {
     var totalFlavorPoints: Double = 0.0
     
     enum ViewSwitch: Int {
-        case profile = 0
-        case list = 1
+        case profile = 1
+        case list = 0
     }
     
     enum TasteType {
@@ -36,9 +47,28 @@ class ContainerViewController: UIViewController {
         case sweetAndThick
         case bitterAndSmooth
         case bitterAndThick
+        case noTaste
         
     }
     
+    @IBAction func logoutButton(sender: UIBarButtonItem) {
+        
+        // sign out firebase
+        try! FIRAuth.auth()!.signOut()
+        
+        // sign out FB
+        FBSDKAccessToken.setCurrentAccessToken(nil)
+        
+        print("user logout")
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
+        
+        self.presentViewController(loginViewController, animated: true, completion: nil)
+
+        
+    }
+    @IBOutlet weak var viewSwitcher: UISegmentedControl!
     @IBAction func viewSwitcher(sender: UISegmentedControl) {
     
         let currentContainer = ViewSwitch(rawValue: sender.selectedSegmentIndex)!
@@ -58,15 +88,25 @@ class ContainerViewController: UIViewController {
         super.viewDidLoad()
 
         // Set UI
-        self.containerProfile.layer.shadowColor = UIColor.blackColor().CGColor
-        self.containerProfile.layer.shadowOffset = CGSizeMake(0, -1)
-        self.containerProfile.layer.shadowOpacity = 0.5
+//        self.containerProfile.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.containerProfile.layer.shadowOffset = CGSizeMake(0, -1)
+//        self.containerProfile.layer.shadowOpacity = 0.5
+        self.scanButton.layer.cornerRadius = 3
+        self.scanButton.layer.shadowRadius = 3
+        self.scanButton.layer.shadowOpacity = 0.5
+        self.scanButton.layer.shadowOffset = CGSizeMake(1, 1)
         
         getUserKey()
         fetchItems()
     
     }
 
+    func startCapturing() {
+    
+        
+    
+    }
+    
     func fetchItems() {
         
         let database = FIRDatabase.database().reference()
@@ -123,10 +163,27 @@ class ContainerViewController: UIViewController {
         let avgTX = ttlTX / Double(ttlRated)
         let avgFL = ttlFL / Double(ttlRated)
         
-        let tasteType: TasteType
+        var tasteType = TasteType.noTaste
+        var tasteTextToShow: String = ""
         
         if avgTX <= 2.5 && avgFL <= 2.5 {
-            
+            tasteType = .sweetAndSmooth
+        } else if avgTX <= 2.5 && avgFL > 2.5 {
+            tasteType = .bitterAndSmooth
+        } else if avgTX > 2.5 && avgFL <= 2.5 {
+            tasteType = .sweetAndThick
+        } else if avgTX > 2.5 && avgFL > 2.5 {
+            tasteType = .bitterAndThick
+        } else {
+            tasteType = .noTaste
+        }
+
+        switch tasteType {
+        case .sweetAndSmooth: tasteTextToShow = "Seems like you prefer sweet and smooth beers"
+        case .sweetAndThick: tasteTextToShow = "Seems like you prefer sweet but thick beers"
+        case .bitterAndSmooth: tasteTextToShow = "Seems like you prefer bitter but smooth beer"
+        case .bitterAndThick: tasteTextToShow = "Seems like you prefer bitter and thick beer"
+        case .noTaste: tasteTextToShow = "Let's scan your first beer!"
         }
         
         destinationProfileVC.totalRatedLabel.text = "You Rated \(String(ttlRated))"

@@ -188,7 +188,6 @@ class ProfileViewController: UIViewController {
             
             UIGraphicsBeginImageContext(gradient.bounds.size)
             gradient.renderInContext(context!)
-            //////////////////////////////
             let gradientImg = UIImage(CGImage: CGBitmapContextCreateImage(context)!)
             
             UIGraphicsEndImageContext()
@@ -245,33 +244,33 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
-    func fetchUserProfile(uid: String) {
-        
-        let databaseRef = FIRDatabase.database().reference()
-        databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
-            
-            guard let users = snapshot.value as? NSDictionary else{
-                fatalError("not NSDictionary")
-            }
-            
-            guard let userDict = users.valueForKey(uid) as? NSDictionary else {
-                fatalError("not key:[Dict]")
-            }
-            
-            guard
-                let totalItems = userDict.valueForKey("total_items") as? Int,
-                let avgTexture = userDict.valueForKey("avg_texture") as? Double,
-                let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
-                else {return}
-            
-            self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
-            self.avgTextureLabel.text = "Avg. Texture: \(String(avgTexture))"
-            self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
-            
-        })
-        
-        
-    }
+//    
+//    func fetchUserProfile(uid: String) {
+//        
+//        let databaseRef = FIRDatabase.database().reference()
+//        databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
+//            
+//            guard let users = snapshot.value as? NSDictionary else{
+//                fatalError("not NSDictionary")
+//            }
+//            
+//            guard let userDict = users.valueForKey(uid) as? NSDictionary else {
+//                fatalError("not key:[Dict]")
+//            }
+//            
+//            guard
+//                let totalItems = userDict.valueForKey("total_items") as? Int,
+//                let avgTexture = userDict.valueForKey("avg_texture") as? Double,
+//                let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
+//                else {return}
+//            
+//            self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
+//            self.avgTextureLabel.text = "Avg. Texture: \(String(avgTexture))"
+//            self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
+//            
+//        })
+//        
+//        
+//    }
     
 }
