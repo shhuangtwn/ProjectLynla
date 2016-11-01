@@ -25,6 +25,11 @@
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
+		75DC70A21DC73E6D005E0A2C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A11DC73E6C005E0A2C /* logout.png */; };
+		75DC70A41DC73ECE005E0A2C /* logout16.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A31DC73ECE005E0A2C /* logout16.png */; };
+		75DC70A61DC74C99005E0A2C /* beerIconWhite64.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */; };
+		75DC70A81DC751D6005E0A2C /* beerAddIcon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */; };
+		75DC70AA1DC79EB9005E0A2C /* beerAddIconRed80.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */; };
 		75E208B11DBDAA9700F238DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E208B01DBDAA9700F238DE /* AdSupport.framework */; };
 		75EEDD561DACCFFC004D4D99 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */; };
 		75EEDD571DACCFFC004D4D99 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */; };
@@ -61,6 +66,11 @@
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
+		75DC70A11DC73E6C005E0A2C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		75DC70A31DC73ECE005E0A2C /* logout16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout16.png; sourceTree = "<group>"; };
+		75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerIconWhite64.png; sourceTree = "<group>"; };
+		75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerAddIcon80.png; sourceTree = "<group>"; };
+		75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerAddIconRed80.png; sourceTree = "<group>"; };
 		75E208B01DBDAA9700F238DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -124,7 +134,12 @@
 				753A577F1D991C8B001A087E /* AppDelegate.swift */,
 				753A57831D991C8B001A087E /* Main.storyboard */,
 				753A57891D991C8B001A087E /* Assets.xcassets */,
+				75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */,
+				75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */,
+				75DC70A31DC73ECE005E0A2C /* logout16.png */,
+				75DC70A11DC73E6C005E0A2C /* logout.png */,
 				754847CD1DB934170030E9B0 /* check.png */,
+				75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */,
 				7593BE2A1DC32746003C7C74 /* beerIcon.png */,
 				7593BE2C1DC3274E003C7C74 /* beerIcon256.png */,
 				753A578B1D991C8B001A087E /* LaunchScreen.storyboard */,
@@ -224,14 +239,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75DC70A81DC751D6005E0A2C /* beerAddIcon80.png in Resources */,
 				7593BE2B1DC32746003C7C74 /* beerIcon.png in Resources */,
 				753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */,
+				75DC70AA1DC79EB9005E0A2C /* beerAddIconRed80.png in Resources */,
 				754847CE1DB934180030E9B0 /* check.png in Resources */,
 				75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */,
 				753A578A1D991C8B001A087E /* Assets.xcassets in Resources */,
 				754847D01DB9FC030030E9B0 /* .gitignore in Resources */,
 				7593BE2D1DC3274E003C7C74 /* beerIcon256.png in Resources */,
 				753A57851D991C8B001A087E /* Main.storyboard in Resources */,
+				75DC70A41DC73ECE005E0A2C /* logout16.png in Resources */,
+				75DC70A61DC74C99005E0A2C /* beerIconWhite64.png in Resources */,
+				75DC70A21DC73E6D005E0A2C /* logout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,10 +25,9 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Set UI
-        self.navigationController?.navigationBar.hidden = false
-     
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ListTableViewController.loadList(_:)),name:"reloadList", object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList",name:"reloadList", object: nil)
+//        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
 
     }
     

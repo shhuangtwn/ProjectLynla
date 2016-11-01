@@ -10,10 +10,21 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
+import Haneke
 
 class ContainerViewController: UIViewController {
 
-    @IBOutlet weak var containerProfile: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ratedNumberLabel: UILabel!
+    @IBOutlet weak var tasteInfoLabel: UILabel!
+    @IBOutlet weak var analyzeButton: UIButton!
+    
+    @IBOutlet weak var scanButtonShadowLabel: UILabel!
+    @IBOutlet weak var ratingLevelCommentLabel: UILabel!
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileCardBG: UILabel!
+//    @IBOutlet weak var containerProfile: UIView!
     @IBOutlet weak var containerList: UIView!
     @IBOutlet weak var scanButton: UIButton!
     @IBAction func scanButton(sender: UIButton) {
@@ -35,12 +46,8 @@ class ContainerViewController: UIViewController {
     var ratedItems: Int = 0
     var totalTexturePoints: Double = 0.0
     var totalFlavorPoints: Double = 0.0
-    
-    enum ViewSwitch: Int {
-        case profile = 1
-        case list = 0
-    }
-    
+    var tasteTextToShow: String = ""
+
     enum TasteType {
     
         case sweetAndSmooth
@@ -68,43 +75,59 @@ class ContainerViewController: UIViewController {
 
         
     }
-    @IBOutlet weak var viewSwitcher: UISegmentedControl!
-    @IBAction func viewSwitcher(sender: UISegmentedControl) {
-    
-        let currentContainer = ViewSwitch(rawValue: sender.selectedSegmentIndex)!
-    
-        switch currentContainer {
-        case .profile:
-            containerProfile.alpha = 1
-            containerList.alpha = 0
-            
-        case .list:
-            containerProfile.alpha = 0
-            containerList.alpha = 1
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set UI
-//        self.containerProfile.layer.shadowColor = UIColor.blackColor().CGColor
-//        self.containerProfile.layer.shadowOffset = CGSizeMake(0, -1)
-//        self.containerProfile.layer.shadowOpacity = 0.5
-        self.scanButton.layer.cornerRadius = 3
-        self.scanButton.layer.shadowRadius = 3
-        self.scanButton.layer.shadowOpacity = 0.5
-        self.scanButton.layer.shadowOffset = CGSizeMake(1, 1)
-        
         getUserKey()
         fetchItems()
     
     }
-
-    func startCapturing() {
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-    
+        // Set UI
+        self.containerList.layer.shadowRadius = 1
+        self.containerList.layer.shadowColor = UIColor.blackColor().CGColor
+        self.containerList.layer.shadowOffset = CGSizeMake(1, 1)
+        self.containerList.layer.shadowOpacity = 0.5
+
+        self.scanButton.layer.cornerRadius = 25
+        self.scanButton.layer.masksToBounds = true
+        self.scanButtonShadowLabel.layer.cornerRadius = 25
+        self.scanButtonShadowLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.scanButtonShadowLabel.layer.shadowOpacity = 0.5
+        self.scanButtonShadowLabel.layer.shadowRadius = 3
+        self.scanButtonShadowLabel.layer.shadowOffset = CGSizeMake(1, 1)
+        let path = UIBezierPath(roundedRect: scanButtonShadowLabel.bounds, cornerRadius: 25).CGPath
+        self.scanButtonShadowLabel.layer.shadowPath = path
+//        self.scanButtonShadowLabel.layer.masksToBounds = true
+
+//        self.scanButtonShadowLabel.clipsToBounds = true
+
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        
+//        self.profileCardBG.clipsToBounds = true
+//        self.profileCardBG.layer.shadowPath = UIBezierPath(rect: profileCardBG.bounds).CGPath
+        self.profileCardBG.layer.cornerRadius = 5
+        self.profileCardBG.layer.shadowColor = UIColor.blackColor().CGColor
+        self.profileCardBG.layer.shadowOpacity = 0.5
+        self.profileCardBG.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+                self.profileCardBG.layer.shadowRadius = 2.5
+        //        self.profileImageView.layer.shadowRadius = 1
+//        self.profileImageView.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.profileImageView.layer.shadowOpacity = 0.5
+//        self.profileImageView.layer.shadowOffset = CGSizeMake(0.5, 0.5)
+        self.profileImageView.layer.borderColor = UIColor.grayColor().CGColor
+        self.profileImageView.layer.borderWidth = 1
+        
+        self.containerList.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        
     }
     
     func fetchItems() {
@@ -125,8 +148,6 @@ class ContainerViewController: UIViewController {
             // Get each item details
             database.child("items").child(itemUID).observeSingleEventOfType(.Value , withBlock: { snapshot in
                 
-                print(snapshot)
-                
                 guard let name = snapshot.value!["name"] as? String else {return}
                 let imageURL = NSURL(string: itemIMG)
                 
@@ -144,10 +165,10 @@ class ContainerViewController: UIViewController {
                     dispatch_async(dispatch_get_main_queue(), {
                         
                         self.ratedItems = self.items.count
+                        self.ratedNumberLabel.text = String(self.ratedItems)
                         self.uploadAverageData(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
                         self.notifyToReloadList()
                         self.updateAvgNumbers(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
-                        self.drawGraph(self.items)
                     })
                     
                 })
@@ -164,7 +185,6 @@ class ContainerViewController: UIViewController {
         let avgFL = ttlFL / Double(ttlRated)
         
         var tasteType = TasteType.noTaste
-        var tasteTextToShow: String = ""
         
         if avgTX <= 2.5 && avgFL <= 2.5 {
             tasteType = .sweetAndSmooth
@@ -186,35 +206,23 @@ class ContainerViewController: UIViewController {
         case .noTaste: tasteTextToShow = "Let's scan your first beer!"
         }
         
-        destinationProfileVC.totalRatedLabel.text = "You Rated \(String(ttlRated))"
-        destinationProfileVC.avgTextureLabel.text = "Avg. Texture: \(String(avgTX))"
-        destinationProfileVC.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFL))"
-        
     }
     
     func notifyToReloadList() {
     
         self.destinationListVC.items = self.items
-        self.destinationProfileVC.receivedItemArray = self.items
         NSNotificationCenter.defaultCenter().postNotificationName("reloadList", object: nil)
     
     }
     
-    func drawGraph(itemArray: [ItemModel]) {
-    
-        destinationProfileVC.runBubbleChart(itemArray)
-
-    }
-    
     func getUserKey() {
         if let user = FIRAuth.auth()?.currentUser {
-            //            let name = user.displayName
+            self.nameLabel.text = user.displayName
             //            let email = user.email
-            //            let photoUrl = user.photoURL
-            self.userUID = user.uid;  // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with
-            // your backend server, if you have one. Use
-            // getTokenWithCompletion:completion: instead.
+            guard let userPhotoURL = user.photoURL else {return}
+            self.profileImageView.hnk_setImageFromURL(userPhotoURL)
+            self.userUID = user.uid
+            
         } else {
             // No user is signed in.
             self.userUID = "user UID missing"
@@ -246,11 +254,14 @@ class ContainerViewController: UIViewController {
             }
             destinationListVC = destinationViewControllerList
         }
-        if segue.identifier == "embedToProfile" {
+        if segue.identifier == "segueToProfile" {
             guard let destinationViewControllerProfile = segue.destinationViewController as? ProfileViewController else {
                 return
             }
             destinationProfileVC = destinationViewControllerProfile
+            self.destinationProfileVC.receivedItemArray = self.items
+//            self.destinationProfileVC.nameLabel.text = tasteTextToShow
+
         }
         
     }

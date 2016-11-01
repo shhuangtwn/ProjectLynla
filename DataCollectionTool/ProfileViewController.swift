@@ -14,11 +14,12 @@ import SwiftCharts
 
 class ProfileViewController: UIViewController {
     
+    @IBAction func naviBackButton(sender: AnyObject) {
+    self.navigationController?.popViewControllerAnimated(true)
+    }
     @IBOutlet weak var totalRatedLabel: UILabel!
     @IBOutlet weak var avgFlavorLabel: UILabel!
     @IBOutlet weak var avgTextureLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     //    var receivedTTL: Int = 0
@@ -35,16 +36,22 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
         
         spinnerUI.hidden = false
         spinnerUI.startAnimating()
         
+        runBubbleChart(receivedItemArray)
+
     }
     
     func runBubbleChart(itemArray: [ItemModel]) {
