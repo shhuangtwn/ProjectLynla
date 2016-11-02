@@ -36,19 +36,23 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
-        
+
         spinnerUI.hidden = false
         spinnerUI.startAnimating()
+        
+        self.scatterChartView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.scatterChartView.layer.shadowOpacity = 0.5
+        self.scatterChartView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.scatterChartView.layer.shadowRadius = 2.5
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         runBubbleChart(receivedItemArray)
 

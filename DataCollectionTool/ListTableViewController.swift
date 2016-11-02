@@ -58,7 +58,7 @@ class ListTableViewController: UITableViewController {
         
         cell.nameLabel.text = item.name
         cell.barcodeLabel.text = item.barcode
-        cell.itemPoint.text = "PT: \(String(item.itemPT))"
+        cell.itemPoint.text = "\(String(Int(item.itemPT))) stars"
         cell.itemTexture.text = "TX: \(String(item.itemTX))"
         cell.itemFlavor.text = "FL: \(String(item.itemFL))"
         cell.itemImageView.hnk_setImageFromURL(item.imageURL)

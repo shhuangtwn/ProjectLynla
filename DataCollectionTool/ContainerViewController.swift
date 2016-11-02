@@ -14,6 +14,7 @@ import Haneke
 
 class ContainerViewController: UIViewController {
 
+    @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratedNumberLabel: UILabel!
     @IBOutlet weak var tasteInfoLabel: UILabel!
@@ -37,6 +38,8 @@ class ContainerViewController: UIViewController {
         
     }
     
+    @IBAction func segueToHome(segue: UIStoryboardSegue) {}
+        
     var items = [ItemModel]()
     
     var destinationListVC = ListTableViewController()
@@ -80,7 +83,6 @@ class ContainerViewController: UIViewController {
         super.viewDidLoad()
 
         getUserKey()
-        fetchItems()
     
     }
     
@@ -88,10 +90,10 @@ class ContainerViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Set UI
-        self.containerList.layer.shadowRadius = 1
-        self.containerList.layer.shadowColor = UIColor.blackColor().CGColor
-        self.containerList.layer.shadowOffset = CGSizeMake(1, 1)
-        self.containerList.layer.shadowOpacity = 0.5
+//        self.containerList.layer.shadowRadius = 1
+//        self.containerList.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.containerList.layer.shadowOffset = CGSizeMake(1, 1)
+//        self.containerList.layer.shadowOpacity = 0.5
 
         self.scanButton.layer.cornerRadius = 25
         self.scanButton.layer.masksToBounds = true
@@ -118,7 +120,7 @@ class ContainerViewController: UIViewController {
         self.profileCardBG.layer.shadowColor = UIColor.blackColor().CGColor
         self.profileCardBG.layer.shadowOpacity = 0.5
         self.profileCardBG.layer.shadowOffset = CGSizeMake(0.0, 2.0)
-                self.profileCardBG.layer.shadowRadius = 2.5
+        self.profileCardBG.layer.shadowRadius = 2.5
         //        self.profileImageView.layer.shadowRadius = 1
 //        self.profileImageView.layer.shadowColor = UIColor.blackColor().CGColor
 //        self.profileImageView.layer.shadowOpacity = 0.5
@@ -128,9 +130,14 @@ class ContainerViewController: UIViewController {
         
         self.containerList.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
         
+        self.spinnerUI.startAnimating()
+        fetchItems()
+
     }
     
     func fetchItems() {
+        
+        self.items = []
         
         let database = FIRDatabase.database().reference()
         
@@ -164,6 +171,8 @@ class ContainerViewController: UIViewController {
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         
+                        self.spinnerUI.stopAnimating()
+                        self.spinnerUI.hidden = true
                         self.ratedItems = self.items.count
                         self.ratedNumberLabel.text = String(self.ratedItems)
                         self.uploadAverageData(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
