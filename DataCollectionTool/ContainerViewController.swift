@@ -25,16 +25,15 @@ class ContainerViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileCardBG: UILabel!
-//    @IBOutlet weak var containerProfile: UIView!
     @IBOutlet weak var containerList: UIView!
     @IBOutlet weak var scanButton: UIButton!
     @IBAction func scanButton(sender: UIButton) {
     
         
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CaptureView")
-        
-        self.presentViewController(CaptureViewController, animated: true, completion: nil)
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CaptureView")
+//        
+//        self.presentViewController(CaptureViewController, animated: true, completion: nil)
         
     }
     
@@ -110,9 +109,9 @@ class ContainerViewController: UIViewController {
 
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+//        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+//        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
         
 //        self.profileCardBG.clipsToBounds = true
 //        self.profileCardBG.layer.shadowPath = UIBezierPath(rect: profileCardBG.bounds).CGPath
@@ -166,18 +165,14 @@ class ContainerViewController: UIViewController {
                     let item = ItemModel(name: name, barcode: barcode, imageURL: imageURL!, itemPT: itemPT, itemTX: itemTX, itemFL: itemFL)
                     self.items.append(item)
                     
-                    self.totalTexturePoints = self.totalTexturePoints + itemTX
-                    self.totalFlavorPoints = self.totalFlavorPoints + itemFL
-                    
                     dispatch_async(dispatch_get_main_queue(), {
                         
                         self.spinnerUI.stopAnimating()
                         self.spinnerUI.hidden = true
                         self.ratedItems = self.items.count
                         self.ratedNumberLabel.text = String(self.ratedItems)
-                        self.uploadAverageData(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
                         self.notifyToReloadList()
-                        self.updateAvgNumbers(self.ratedItems, ttlTX: self.totalTexturePoints, ttlFL: self.totalFlavorPoints)
+                        self.updateAvgNumbers(self.items)
                     })
                     
                 })
@@ -188,32 +183,51 @@ class ContainerViewController: UIViewController {
         
     }
     
-    func updateAvgNumbers(ttlRated: Int, ttlTX: Double, ttlFL: Double) {
+    func updateAvgNumbers(items: [ItemModel]) {
+        
+//        self.totalFlavorPoints = 0.0
+//        self.totalTexturePoints = 0.0
+        
+        var ttlFL: Double = 0.0
+        var ttlTX: Double = 0.0
+        let ttlRated: Int = items.count
+        
+        for item in items {
+            
+            ttlFL = ttlFL + item.itemFL
+            ttlTX = ttlTX + item.itemTX
+            
+        }
         
         let avgTX = ttlTX / Double(ttlRated)
         let avgFL = ttlFL / Double(ttlRated)
         
+        print("avTX: \(avgTX)")
+        print("avFL: \(avgFL)")
+        
         var tasteType = TasteType.noTaste
         
-        if avgTX <= 2.5 && avgFL <= 2.5 {
+        if avgTX <= 3.0 && avgFL <= 3.0 {
             tasteType = .sweetAndSmooth
-        } else if avgTX <= 2.5 && avgFL > 2.5 {
+        } else if avgTX <= 3.0 && avgFL > 3.0 {
             tasteType = .bitterAndSmooth
-        } else if avgTX > 2.5 && avgFL <= 2.5 {
+        } else if avgTX > 3.0 && avgFL <= 3.0 {
             tasteType = .sweetAndThick
-        } else if avgTX > 2.5 && avgFL > 2.5 {
+        } else if avgTX > 3.0 && avgFL > 3.0 {
             tasteType = .bitterAndThick
         } else {
             tasteType = .noTaste
         }
 
         switch tasteType {
-        case .sweetAndSmooth: tasteTextToShow = "Seems like you prefer sweet and smooth beers"
-        case .sweetAndThick: tasteTextToShow = "Seems like you prefer sweet but thick beers"
-        case .bitterAndSmooth: tasteTextToShow = "Seems like you prefer bitter but smooth beer"
-        case .bitterAndThick: tasteTextToShow = "Seems like you prefer bitter and thick beer"
-        case .noTaste: tasteTextToShow = "Let's scan your first beer!"
+        case .sweetAndSmooth: tasteTextToShow = "You prefer sweet and smooth beers!"
+        case .sweetAndThick: tasteTextToShow = "You prefer sweet but thick beers!"
+        case .bitterAndSmooth: tasteTextToShow = "You prefer bitter but smooth beer!"
+        case .bitterAndThick: tasteTextToShow = "You prefer bitter and thick beer!"
+        case .noTaste: tasteTextToShow = "You need to return to previous page and scan a beer!"
         }
+        
+        self.uploadAverageData(ttlRated, ttlTX: ttlTX, ttlFL: ttlFL)
         
     }
     
@@ -269,7 +283,7 @@ class ContainerViewController: UIViewController {
             }
             destinationProfileVC = destinationViewControllerProfile
             self.destinationProfileVC.receivedItemArray = self.items
-//            self.destinationProfileVC.nameLabel.text = tasteTextToShow
+            self.destinationProfileVC.receivedTasteString = tasteTextToShow
 
         }
         

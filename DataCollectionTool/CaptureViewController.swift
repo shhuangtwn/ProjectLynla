@@ -19,12 +19,29 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet weak var messageLabel: UILabel!
     //@IBOutlet weak var barCodeFrameView: UIView!
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        barCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
+        barCodeFrameView.layer.borderWidth = 2
+        self.view.addSubview(barCodeFrameView)
+        self.view.bringSubviewToFront(barCodeFrameView)
+    
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set UI
+//        self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationController?.title = "Find the barcode!"
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        
+            self.navigationController?.navigationItem.leftBarButtonItem?.title = "Back"
         
         // FIrebase Analytics Event Log
         var nameForFIRAnalytics: String = ""
@@ -80,13 +97,6 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.addSublayer(videoPreviewLayer)
         captureSession.startRunning()
-        
-        
-        barCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
-        barCodeFrameView.layer.borderWidth = 2
-        self.view.addSubview(barCodeFrameView)
-        self.view.bringSubviewToFront(barCodeFrameView)
-        
         
     }
     

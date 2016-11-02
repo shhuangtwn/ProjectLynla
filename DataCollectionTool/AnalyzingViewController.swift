@@ -38,7 +38,14 @@ class AnalyzingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.title = "Analyzing..."
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        
+        self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        
         self.checkImage.hidden = true
         
         // Get userUID

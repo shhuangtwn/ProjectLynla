@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lynla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-kw-pgZ">
-                                <rect key="frame" x="285" y="252" width="70" height="32"/>
+                                <rect key="frame" x="285" y="255" width="70" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="6rw-4N-uSK"/>
                                 </constraints>
@@ -64,7 +64,7 @@
                             <constraint firstItem="b5c-kw-pgZ" firstAttribute="leading" secondItem="fwb-US-uH7" secondAttribute="trailing" constant="5" id="XgT-ld-zjD"/>
                             <constraint firstItem="b5c-kw-pgZ" firstAttribute="leading" secondItem="kTT-tW-YEH" secondAttribute="trailing" constant="5" id="dSf-M3-gqX"/>
                             <constraint firstItem="b5c-kw-pgZ" firstAttribute="bottom" secondItem="fwb-US-uH7" secondAttribute="bottom" id="gI4-Ie-oLg"/>
-                            <constraint firstItem="sHU-lZ-dit" firstAttribute="top" secondItem="b5c-kw-pgZ" secondAttribute="bottom" constant="9" id="kok-2B-VyX"/>
+                            <constraint firstItem="sHU-lZ-dit" firstAttribute="top" secondItem="b5c-kw-pgZ" secondAttribute="bottom" constant="6" id="kok-2B-VyX"/>
                             <constraint firstItem="kTT-tW-YEH" firstAttribute="top" secondItem="fwb-US-uH7" secondAttribute="top" id="pOq-LP-9Oo"/>
                             <constraint firstItem="b5c-kw-pgZ" firstAttribute="leading" secondItem="fwb-US-uH7" secondAttribute="trailing" constant="8" id="uyC-JK-9QJ"/>
                         </constraints>

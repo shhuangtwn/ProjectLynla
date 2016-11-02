@@ -38,9 +38,6 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var testSlider: UISlider!
-    @IBAction func homeButton(sender: AnyObject) {
-        self.navigationController?.navigationBar.hidden = false
-    }
     var receivedBarCode: String = ""
     var receivedItemImageData = NSData()
     var receivedLogoText: String = ""
@@ -101,6 +98,15 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set UI
+        self.navigationController?.title = "Lynla"
+        self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+
+        
         // Get userUID
         let defaults = NSUserDefaults.standardUserDefaults()
         if let uuid = defaults.stringForKey("userUID") {
@@ -113,7 +119,6 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         FIRAnalytics.logEventWithName("complete_analyze", parameters: ["item": receivedLogoText])
         
         // Set UI
-        self.navigationController?.navigationBar.hidden = true
         testSlider.hidden = true
         ratingSegmentor.selectedSegmentIndex = (Int(ratedPoints) - 1 )
         flavorSegmentor.selectedSegmentIndex = (Int(ratedTexture) - 1 )

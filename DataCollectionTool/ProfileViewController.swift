@@ -18,15 +18,16 @@ class ProfileViewController: UIViewController {
     self.navigationController?.popViewControllerAnimated(true)
     }
     @IBOutlet weak var totalRatedLabel: UILabel!
-    @IBOutlet weak var avgFlavorLabel: UILabel!
-    @IBOutlet weak var avgTextureLabel: UILabel!
-    
+    @IBOutlet weak var cardBGLabel: UILabel!
+    @IBOutlet weak var chartBGLabel: UILabel!
     @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     //    var receivedTTL: Int = 0
     //    var receivedTX: Double = 0.0
     //    var receivedFL: Double = 0.0
+    @IBOutlet weak var tasteInfoLabel: UILabel!
     
     var receivedItemArray = [ItemModel]()
+    var receivedTasteString: String = ""
     
     @IBOutlet weak var scatterChartView: UIView!
     private var chart: Chart?
@@ -41,6 +42,16 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
 
+        self.cardBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.cardBGLabel.layer.shadowOpacity = 0.5
+        self.cardBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.cardBGLabel.layer.shadowRadius = 2.5
+        
+        self.chartBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.chartBGLabel.layer.shadowOpacity = 0.5
+        self.chartBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.chartBGLabel.layer.shadowRadius = 2.5
+        
         spinnerUI.hidden = false
         spinnerUI.startAnimating()
         
@@ -48,6 +59,9 @@ class ProfileViewController: UIViewController {
         self.scatterChartView.layer.shadowOpacity = 0.5
         self.scatterChartView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
         self.scatterChartView.layer.shadowRadius = 2.5
+        
+        self.totalRatedLabel.text = String(receivedItemArray.count)
+        self.tasteInfoLabel.text = receivedTasteString
     }
     
     
@@ -91,8 +105,8 @@ class ProfileViewController: UIViewController {
         let xValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         let yValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         
-        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "<< Sweeter                   FLAVOR                    Bitter >>", settings: labelSettings))
-        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "<< Smoother                   TEXTURE                   Thicker >>", settings: labelSettings.defaultVertical()))
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "<< Sweeter                 FLAVOR                  Bitter >>", settings: labelSettings))
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "<< Smoother            TEXTURE            Thicker >>", settings: labelSettings.defaultVertical()))
         
         let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: ChartDefaults.chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
         let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)

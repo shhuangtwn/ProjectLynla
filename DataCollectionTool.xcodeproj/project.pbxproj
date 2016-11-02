@@ -15,6 +15,7 @@
 		753A57881D991C8B001A087E /* DataCollectionTool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 753A57861D991C8B001A087E /* DataCollectionTool.xcdatamodeld */; };
 		753A578A1D991C8B001A087E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753A57891D991C8B001A087E /* Assets.xcassets */; };
 		753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A578B1D991C8B001A087E /* LaunchScreen.storyboard */; };
+		753DAB361DC9F1C1004F8192 /* pieChart100.png in Resources */ = {isa = PBXBuildFile; fileRef = 753DAB351DC9F1C1004F8192 /* pieChart100.png */; };
 		754847CE1DB934180030E9B0 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 754847CD1DB934170030E9B0 /* check.png */; };
 		754847D01DB9FC030030E9B0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 754847CF1DB9FC010030E9B0 /* .gitignore */; };
 		754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */; };
@@ -58,6 +59,7 @@
 		753A57891D991C8B001A087E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		753A578C1D991C8B001A087E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		753A578E1D991C8B001A087E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		753DAB351DC9F1C1004F8192 /* pieChart100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieChart100.png; sourceTree = "<group>"; };
 		754847CD1DB934170030E9B0 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		754847CF1DB9FC010030E9B0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */,
 				75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */,
 				75DC70AB1DC89CDB005E0A2C /* piechartIconBig.png */,
+				753DAB351DC9F1C1004F8192 /* pieChart100.png */,
 				75DC70AC1DC89CDB005E0A2C /* starIcon24.png */,
 				75DC70A31DC73ECE005E0A2C /* logout16.png */,
 				75DC70A11DC73E6C005E0A2C /* logout.png */,
@@ -248,6 +251,7 @@
 				75DC70A81DC751D6005E0A2C /* beerAddIcon80.png in Resources */,
 				7593BE2B1DC32746003C7C74 /* beerIcon.png in Resources */,
 				753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */,
+				753DAB361DC9F1C1004F8192 /* pieChart100.png in Resources */,
 				75DC70AA1DC79EB9005E0A2C /* beerAddIconRed80.png in Resources */,
 				754847CE1DB934180030E9B0 /* check.png in Resources */,
 				75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */,
