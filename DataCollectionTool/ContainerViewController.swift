@@ -67,6 +67,12 @@ class ContainerViewController: UIViewController {
         // sign out FB
         FBSDKAccessToken.setCurrentAccessToken(nil)
         
+        // clean user default
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.removeObjectForKey("userUID")
+        userDefault.removeObjectForKey("username")
+        userDefault.synchronize()
+        
         print("user logout")
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -167,9 +173,6 @@ class ContainerViewController: UIViewController {
     }
     
     func updateAvgNumbers(items: [ItemModel]) {
-        
-//        self.totalFlavorPoints = 0.0
-//        self.totalTexturePoints = 0.0
         
         var ttlFL: Double = 0.0
         var ttlTX: Double = 0.0

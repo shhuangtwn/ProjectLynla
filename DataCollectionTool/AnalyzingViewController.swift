@@ -67,7 +67,7 @@ class AnalyzingViewController: UIViewController {
             self.userUID = user.uid;
             
         } else {
-            self.userUID = "user UID missing"
+            self.userUID = ""
             
         }
     }
@@ -96,10 +96,17 @@ class AnalyzingViewController: UIViewController {
                     // Get item name
                     self.getItemName(self.itemUID)
                     
-                    
-                    // Check if inside user list
-                    self.searchInUserList(self.userUID, code: code, iuid: self.itemUID)
-                    
+                    // If trying...
+                    if self.userUID == "" {
+                        // perform
+                        self.matchingStatus = .newToUser
+                        self.infoLabel.text = "Found a match!"
+                        self.moveToItemPage()
+                        
+                    } else {
+                        // Check if inside user list
+                        self.searchInUserList(self.userUID, code: code, iuid: self.itemUID)
+                    }
                 }
                 
             } else {
@@ -138,7 +145,6 @@ class AnalyzingViewController: UIViewController {
                         self.currentTexture = obj["texture_points"] as! Double
                         self.currentFlavor = obj["flavor_points"] as! Double
                         
-                        print(self.currentPoints)
                     }
             }
             
@@ -185,7 +191,6 @@ class AnalyzingViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), {
 
             foundItemName = item["name"] as! String
-                print("found:\(foundItemName)")
                 
             self.detectedLogo = foundItemName
                 
@@ -355,7 +360,6 @@ class AnalyzingViewController: UIViewController {
             destinationViewController.receivedInformationText = infoLabel.text!
             destinationViewController.receivedMatchingStatus = mode
             
-            print("seg: \(currentPoints)")
         }
         
     }

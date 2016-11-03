@@ -29,12 +29,23 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBOutlet weak var doneButtonForSaving: UIBarButtonItem!
     @IBAction func doneButtonForSaving(sender: UIBarButtonItem) {
+        if self.userUID == "" {
+
+            let alert = UIAlertController(title: "Lynla!", message: "Thanks for trying out, please login to record your rating", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Back to Login", style: UIAlertActionStyle.Default, handler: { action in
+                self.performSegueWithIdentifier("segueBackToCaptureForDismissingVC", sender: nil)
+                
+            }))
+
+        self.presentViewController(alert, animated: true, completion: nil)
+            
+        } else {
         
-        self.loadingMaskView.hidden = false
-        self.loadingSpinnerUI.hidden = false
-        self.loadingSpinnerUI.startAnimating()
-        postToCloudPressed()
+            postToCloudPressed()
+            
+        }
         
     }
     @IBOutlet weak var avgFlavorLabel: UILabel!
@@ -109,6 +120,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
         
         // Set UI
+        
         self.loadingMaskView.hidden = true
         self.loadingSpinnerUI.hidden = true
         
@@ -186,7 +198,15 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func postToCloudPressed() {
+        
+        self.loadingMaskView.hidden = false
+        self.loadingSpinnerUI.hidden = false
+        self.loadingSpinnerUI.startAnimating()
         
         self.ratedPoints = Double(self.ratingControl.rating)
         
@@ -276,7 +296,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
             self.userUID = user.uid;
             
         } else {
-            self.userUID = "user UID missing"
+            self.userUID = ""
             
         }
     }

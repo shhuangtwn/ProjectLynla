@@ -16,6 +16,8 @@ import Crashlytics
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
+    @IBOutlet weak var loginButton: FBSDKLoginButton!
+    
     @IBAction func segueToHome(segue: UIStoryboardSegue) {
         
         viewDidLoad()
@@ -24,13 +26,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var loginSpinner: UIActivityIndicatorView!
     
+    @IBOutlet weak var loginWithoutFBButton: UIButton!
+    @IBAction func loginWithoutFBButton(sender: UIButton) {
     
-    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("NaviToCaptureView")
+        
+        self.presentViewController(CaptureViewController, animated: true, completion: nil)
+    
+    }
+    
+//    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.loginWithoutFBButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.loginWithoutFBButton.layer.borderWidth = 1
+        
         self.loginButton.hidden = true
+        self.loginButton.layer.shadowColor = UIColor.blackColor().CGColor
+        self.loginButton.layer.shadowOpacity = 0.5
+        self.loginButton.layer.shadowOffset = CGSizeMake(0.0, 1.0)
+        self.loginButton.layer.shadowRadius = 1.5
+        let path = UIBezierPath(roundedRect: self.loginButton.bounds, cornerRadius: 2).CGPath
+        self.loginButton.layer.shadowPath = path
         
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if user != nil {
@@ -42,7 +62,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
             } else {
                 
-                self.loginButton.center = self.view.center
+//                self.loginButton.center = self.view.center
+                
+                
                 self.loginButton.readPermissions = ["public_profile", "email", "user_friends"]
                 self.loginButton.delegate = self
                 self.view.addSubview(self.loginButton)
