@@ -16,6 +16,18 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var barCodeFrameView = UIView()
     
+    @IBAction func cancelCaptureButton(sender: AnyObject) {
+    
+        self.dismissViewControllerAnimated(true, completion: nil)
+    
+    }
+    
+    @IBAction func segueBackToCaptureForDismissingVC(segue: UIStoryboardSegue) {
+    
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
     @IBOutlet weak var messageLabel: UILabel!
     //@IBOutlet weak var barCodeFrameView: UIView!
     
@@ -33,15 +45,12 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         super.viewDidLoad()
         
         // Set UI
-//        self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationController?.title = "Find the barcode!"
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
-        
-            self.navigationController?.navigationItem.leftBarButtonItem?.title = "Back"
         
         // FIrebase Analytics Event Log
         var nameForFIRAnalytics: String = ""

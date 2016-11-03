@@ -16,6 +16,12 @@ import Crashlytics
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
+    @IBAction func segueToHome(segue: UIStoryboardSegue) {
+        
+        viewDidLoad()
+
+    }
+
     @IBOutlet weak var loginSpinner: UIActivityIndicatorView!
     
     

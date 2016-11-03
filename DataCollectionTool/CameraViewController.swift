@@ -15,8 +15,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var isFirstTime = true
     var itemImageData = NSData()
     @IBOutlet weak var barcodeLabel: UILabel!
+    @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.spinnerUI.startAnimating()
         
         self.navigationController?.title = "Take a picture!"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -24,7 +27,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
         
-            self.navigationController?.navigationBar.topItem?.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
         
         self.barcodeLabel.text = "Barcode found: \(receivedBarCode)"
         

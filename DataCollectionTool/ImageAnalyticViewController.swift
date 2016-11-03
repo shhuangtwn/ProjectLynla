@@ -29,14 +29,17 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func doneButtonForSaving(sender: UIBarButtonItem) {
+        
+        postToCloudPressed()
+        
+    }
     @IBOutlet weak var avgFlavorLabel: UILabel!
     @IBOutlet weak var avgTextureLabel: UILabel!
     @IBOutlet weak var avgPointsLabel: UILabel!
     @IBOutlet weak var ratedTimesLabel: UILabel!
     @IBOutlet weak var logoTextfield: UITextField!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var testSlider: UISlider!
     var receivedBarCode: String = ""
     var receivedItemImageData = NSData()
@@ -158,11 +161,11 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ImageAnalyticViewController.dismissKeyboard)))
         
         // Save to cloud button tapped
-        self.saveButton.addTarget(self, action: #selector(self.postToCloudPressed(_:)), forControlEvents: .TouchUpInside)
+//        self.saveButton.addTarget(self, action: #selector(self.postToCloudPressed(_:)), forControlEvents: .TouchUpInside)
         
     }
     
-    func postToCloudPressed(sender: UIButton) {
+    func postToCloudPressed() {
         
         let databaseRef = FIRDatabase.database().reference()
         let postItemRef = databaseRef.child("items").childByAutoId()
@@ -222,8 +225,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
         let alert = UIAlertController(title: "Lynla!", message: "Thanks for your feedback", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Home", style: UIAlertActionStyle.Default, handler: { action in
-            self.performSegueWithIdentifier("segueToHome", sender: nil)
-            self.navigationController?.navigationBar.hidden = false
+            self.performSegueWithIdentifier("segueBackToCaptureForDismissingVC", sender: nil)
 
         }))
         

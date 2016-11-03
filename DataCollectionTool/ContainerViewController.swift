@@ -23,6 +23,7 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var scanButtonShadowLabel: UILabel!
     @IBOutlet weak var ratingLevelCommentLabel: UILabel!
     
+    @IBOutlet weak var tutorialInfoLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileCardBG: UILabel!
     @IBOutlet weak var containerList: UIView!
@@ -30,15 +31,13 @@ class ContainerViewController: UIViewController {
     @IBAction func scanButton(sender: UIButton) {
     
         
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CaptureView")
-//        
-//        self.presentViewController(CaptureViewController, animated: true, completion: nil)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let CaptureViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("NaviToCaptureView")
+        
+        self.presentViewController(CaptureViewController, animated: true, completion: nil)
         
     }
     
-    @IBAction func segueToHome(segue: UIStoryboardSegue) {}
-        
     var items = [ItemModel]()
     
     var destinationListVC = ListTableViewController()
@@ -74,7 +73,6 @@ class ContainerViewController: UIViewController {
         let loginViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginView")
         
         self.presentViewController(loginViewController, animated: true, completion: nil)
-
         
     }
     
@@ -89,11 +87,8 @@ class ContainerViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Set UI
-//        self.containerList.layer.shadowRadius = 1
-//        self.containerList.layer.shadowColor = UIColor.blackColor().CGColor
-//        self.containerList.layer.shadowOffset = CGSizeMake(1, 1)
-//        self.containerList.layer.shadowOpacity = 0.5
-
+        
+        
         self.scanButton.layer.cornerRadius = 25
         self.scanButton.layer.masksToBounds = true
         self.scanButtonShadowLabel.layer.cornerRadius = 25
@@ -103,35 +98,25 @@ class ContainerViewController: UIViewController {
         self.scanButtonShadowLabel.layer.shadowOffset = CGSizeMake(1, 1)
         let path = UIBezierPath(roundedRect: scanButtonShadowLabel.bounds, cornerRadius: 25).CGPath
         self.scanButtonShadowLabel.layer.shadowPath = path
-//        self.scanButtonShadowLabel.layer.masksToBounds = true
-
-//        self.scanButtonShadowLabel.clipsToBounds = true
 
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 43.0/255.0, green: 74.0/255.0, blue: 109.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-//        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
-//        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
-//        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
-        
-//        self.profileCardBG.clipsToBounds = true
-//        self.profileCardBG.layer.shadowPath = UIBezierPath(rect: profileCardBG.bounds).CGPath
+
         self.profileCardBG.layer.cornerRadius = 5
         self.profileCardBG.layer.shadowColor = UIColor.blackColor().CGColor
         self.profileCardBG.layer.shadowOpacity = 0.5
         self.profileCardBG.layer.shadowOffset = CGSizeMake(0.0, 2.0)
         self.profileCardBG.layer.shadowRadius = 2.5
-        //        self.profileImageView.layer.shadowRadius = 1
-//        self.profileImageView.layer.shadowColor = UIColor.blackColor().CGColor
-//        self.profileImageView.layer.shadowOpacity = 0.5
-//        self.profileImageView.layer.shadowOffset = CGSizeMake(0.5, 0.5)
+
         self.profileImageView.layer.borderColor = UIColor.grayColor().CGColor
         self.profileImageView.layer.borderWidth = 1
         
         self.containerList.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
-        
+        self.tutorialInfoLabel.hidden = true
         self.spinnerUI.startAnimating()
         fetchItems()
 
+        
     }
     
     func fetchItems() {
@@ -232,7 +217,13 @@ class ContainerViewController: UIViewController {
     }
     
     func notifyToReloadList() {
-    
+        
+        if items.count == 0 {
+            self.tutorialInfoLabel.hidden = false
+        } else {
+            self.tutorialInfoLabel.hidden = true
+        }
+        
         self.destinationListVC.items = self.items
         NSNotificationCenter.defaultCenter().postNotificationName("reloadList", object: nil)
     
@@ -284,6 +275,7 @@ class ContainerViewController: UIViewController {
             destinationProfileVC = destinationViewControllerProfile
             self.destinationProfileVC.receivedItemArray = self.items
             self.destinationProfileVC.receivedTasteString = tasteTextToShow
+            
 
         }
         

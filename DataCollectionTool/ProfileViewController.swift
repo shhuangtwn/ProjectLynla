@@ -41,6 +41,9 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
         self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+//        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+//        navigationItem.leftBarButtonItem = backButton
+
 
         self.cardBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
         self.cardBGLabel.layer.shadowOpacity = 0.5
