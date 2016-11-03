@@ -56,11 +56,32 @@ class ListTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ListTableViewCell
         let item = items[indexPath.row]
         
+        let fl = item.itemFL
+        let tx = item.itemTX
+        var flString: String = ""
+        var txString: String = ""
+        
+        if fl < 3.0 {
+            flString = "Sweet"
+        } else if fl > 3.0 {
+            flString = "Bitter"
+        } else {
+            flString = "Medium"
+        }
+        
+        if tx < 3.0 {
+            txString = "Smooth"
+        } else if tx > 3.0 {
+            txString = "Thick"
+        } else {
+            txString = "Normal"
+        }
+        
         cell.nameLabel.text = item.name
         cell.barcodeLabel.text = item.barcode
         cell.itemPoint.text = "\(String(Int(item.itemPT))) stars"
-        cell.itemTexture.text = "TX: \(String(item.itemTX))"
-        cell.itemFlavor.text = "FL: \(String(item.itemFL))"
+        cell.itemTexture.text = txString
+        cell.itemFlavor.text = flString
         cell.itemImageView.hnk_setImageFromURL(item.imageURL)
         
         return cell

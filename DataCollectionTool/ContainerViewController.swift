@@ -87,8 +87,6 @@ class ContainerViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Set UI
-        
-        
         self.scanButton.layer.cornerRadius = 25
         self.scanButton.layer.masksToBounds = true
         self.scanButtonShadowLabel.layer.cornerRadius = 25
