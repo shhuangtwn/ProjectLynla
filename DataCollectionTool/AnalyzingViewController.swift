@@ -38,7 +38,14 @@ class AnalyzingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.title = "Analyzing..."
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        
+        self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        
         self.checkImage.hidden = true
         
         // Get userUID
@@ -60,7 +67,7 @@ class AnalyzingViewController: UIViewController {
             self.userUID = user.uid;
             
         } else {
-            self.userUID = "user UID missing"
+            self.userUID = ""
             
         }
     }
@@ -89,10 +96,17 @@ class AnalyzingViewController: UIViewController {
                     // Get item name
                     self.getItemName(self.itemUID)
                     
-                    
-                    // Check if inside user list
-                    self.searchInUserList(self.userUID, code: code, iuid: self.itemUID)
-                    
+                    // If trying...
+                    if self.userUID == "" {
+                        // perform
+                        self.matchingStatus = .newToUser
+                        self.infoLabel.text = "Found a match!"
+                        self.moveToItemPage()
+                        
+                    } else {
+                        // Check if inside user list
+                        self.searchInUserList(self.userUID, code: code, iuid: self.itemUID)
+                    }
                 }
                 
             } else {
@@ -131,7 +145,6 @@ class AnalyzingViewController: UIViewController {
                         self.currentTexture = obj["texture_points"] as! Double
                         self.currentFlavor = obj["flavor_points"] as! Double
                         
-                        print(self.currentPoints)
                     }
             }
             
@@ -178,7 +191,6 @@ class AnalyzingViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), {
 
             foundItemName = item["name"] as! String
-                print("found:\(foundItemName)")
                 
             self.detectedLogo = foundItemName
                 
@@ -348,7 +360,6 @@ class AnalyzingViewController: UIViewController {
             destinationViewController.receivedInformationText = infoLabel.text!
             destinationViewController.receivedMatchingStatus = mode
             
-            print("seg: \(currentPoints)")
         }
         
     }

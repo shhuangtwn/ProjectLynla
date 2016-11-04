@@ -17,6 +17,18 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var itemTexture: UILabel!
     @IBOutlet weak var itemFlavor: UILabel!
     @IBOutlet weak var itemRecordDate: UILabel!
+    @IBOutlet weak var cardBGLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.cardBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.cardBGLabel.layer.shadowOpacity = 0.5
+        self.cardBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.cardBGLabel.layer.shadowRadius = 2.5
+//        let path = UIBezierPath(roundedRect: cardBGLabel.bounds, cornerRadius: 3)
+//        self.cardBGLabel.layer.shadowPath = path.CGPath
+
+    }
     
 }

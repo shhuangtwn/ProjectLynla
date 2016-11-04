@@ -14,18 +14,20 @@ import SwiftCharts
 
 class ProfileViewController: UIViewController {
     
+    @IBAction func naviBackButton(sender: AnyObject) {
+    self.navigationController?.popViewControllerAnimated(true)
+    }
     @IBOutlet weak var totalRatedLabel: UILabel!
-    @IBOutlet weak var avgFlavorLabel: UILabel!
-    @IBOutlet weak var avgTextureLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var cardBGLabel: UILabel!
+    @IBOutlet weak var chartBGLabel: UILabel!
     @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     //    var receivedTTL: Int = 0
     //    var receivedTX: Double = 0.0
     //    var receivedFL: Double = 0.0
+    @IBOutlet weak var tasteInfoLabel: UILabel!
     
     var receivedItemArray = [ItemModel]()
+    var receivedTasteString: String = ""
     
     @IBOutlet weak var scatterChartView: UIView!
     private var chart: Chart?
@@ -35,16 +37,42 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+//        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+//        navigationItem.leftBarButtonItem = backButton
+
+
+        self.cardBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.cardBGLabel.layer.shadowOpacity = 0.5
+        self.cardBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.cardBGLabel.layer.shadowRadius = 2.5
         
+        self.chartBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.chartBGLabel.layer.shadowOpacity = 0.5
+        self.chartBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.chartBGLabel.layer.shadowRadius = 2.5
+        
+        spinnerUI.hidden = false
+        spinnerUI.startAnimating()
+        
+        self.scatterChartView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.scatterChartView.layer.shadowOpacity = 0.5
+        self.scatterChartView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.scatterChartView.layer.shadowRadius = 2.5
+        
+        self.totalRatedLabel.text = String(receivedItemArray.count)
+        self.tasteInfoLabel.text = receivedTasteString
     }
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        spinnerUI.hidden = false
-        spinnerUI.startAnimating()
-        
+        runBubbleChart(receivedItemArray)
+
     }
     
     func runBubbleChart(itemArray: [ItemModel]) {
@@ -80,8 +108,8 @@ class ProfileViewController: UIViewController {
         let xValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         let yValues = (0).stride(through: 6, by: 1).map {ChartAxisValueInt($0, labelSettings: labelSettings)}
         
-        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "<< Sweeter                   FLAVOR                    Bitter >>", settings: labelSettings))
-        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "<< Smoother                   TEXTURE                   Thicker >>", settings: labelSettings.defaultVertical()))
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "<< Sweeter                 FLAVOR                  Bitter >>", settings: labelSettings))
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "<< Smoother            TEXTURE            Thicker >>", settings: labelSettings.defaultVertical()))
         
         let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: ChartDefaults.chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
         let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
@@ -188,7 +216,6 @@ class ProfileViewController: UIViewController {
             
             UIGraphicsBeginImageContext(gradient.bounds.size)
             gradient.renderInContext(context!)
-            //////////////////////////////
             let gradientImg = UIImage(CGImage: CGBitmapContextCreateImage(context)!)
             
             UIGraphicsEndImageContext()
@@ -245,33 +272,33 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
-    func fetchUserProfile(uid: String) {
-        
-        let databaseRef = FIRDatabase.database().reference()
-        databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
-            
-            guard let users = snapshot.value as? NSDictionary else{
-                fatalError("not NSDictionary")
-            }
-            
-            guard let userDict = users.valueForKey(uid) as? NSDictionary else {
-                fatalError("not key:[Dict]")
-            }
-            
-            guard
-                let totalItems = userDict.valueForKey("total_items") as? Int,
-                let avgTexture = userDict.valueForKey("avg_texture") as? Double,
-                let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
-                else {return}
-            
-            self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
-            self.avgTextureLabel.text = "Avg. Texture: \(String(avgTexture))"
-            self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
-            
-        })
-        
-        
-    }
+//    
+//    func fetchUserProfile(uid: String) {
+//        
+//        let databaseRef = FIRDatabase.database().reference()
+//        databaseRef.child("users").queryOrderedByChild(uid).observeSingleEventOfType(.Value , withBlock: { (snapshot) in
+//            
+//            guard let users = snapshot.value as? NSDictionary else{
+//                fatalError("not NSDictionary")
+//            }
+//            
+//            guard let userDict = users.valueForKey(uid) as? NSDictionary else {
+//                fatalError("not key:[Dict]")
+//            }
+//            
+//            guard
+//                let totalItems = userDict.valueForKey("total_items") as? Int,
+//                let avgTexture = userDict.valueForKey("avg_texture") as? Double,
+//                let avgFlavor = userDict.valueForKey("avg_flavor") as? Double
+//                else {return}
+//            
+//            self.totalRatedLabel.text = "You Rated \(String(totalItems)) beers"
+//            self.avgTextureLabel.text = "Avg. Texture: \(String(avgTexture))"
+//            self.avgFlavorLabel.text = "Avg. Flavor: \(String(avgFlavor))"
+//            
+//        })
+//        
+//        
+//    }
     
 }

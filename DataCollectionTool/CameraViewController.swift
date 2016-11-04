@@ -14,20 +14,47 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     let imagePicker = UIImagePickerController()
     var isFirstTime = true
     var itemImageData = NSData()
-    
+    @IBOutlet weak var barcodeLabel: UILabel!
+    @IBOutlet weak var spinnerUI: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.spinnerUI.startAnimating()
+        
+        self.navigationController?.title = "Take a picture!"
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        
+        self.navigationItem.hidesBackButton = true
+        
+        self.barcodeLabel.text = "Barcode found: \(receivedBarCode)"
+        
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
         
-        self.navigationController?.navigationBar.hidden = true
+    
         
-        super.viewDidAppear(false)
+        
+        
         if isFirstTime{
             isFirstTime = false
-            openCamera()
+            
+            let seconds = 2.0
+            let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                
+                // here code perfomed with delay
+                self.openCamera()
+                
+            })
+            
+        
         }else{
             self.performSegueWithIdentifier("segueToAnalyze", sender: nil)
         }
@@ -52,7 +79,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(false, completion: nil)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let startingViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("NavigationViewController")
+        let startingViewController: UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ProfileNavi")
         
         self.presentViewController(startingViewController, animated: true, completion: nil)
     }

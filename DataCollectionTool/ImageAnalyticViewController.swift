@@ -29,18 +29,32 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBOutlet weak var doneButtonForSaving: UIBarButtonItem!
+    @IBAction func doneButtonForSaving(sender: UIBarButtonItem) {
+        if self.userUID == "" {
+
+            let alert = UIAlertController(title: "Lynla!", message: "Thanks for trying out, please login to record your rating", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Back to Login", style: UIAlertActionStyle.Default, handler: { action in
+                self.performSegueWithIdentifier("segueBackToCaptureForDismissingVC", sender: nil)
+                
+            }))
+
+        self.presentViewController(alert, animated: true, completion: nil)
+            
+        } else {
+        
+            postToCloudPressed()
+            
+        }
+        
+    }
     @IBOutlet weak var avgFlavorLabel: UILabel!
     @IBOutlet weak var avgTextureLabel: UILabel!
     @IBOutlet weak var avgPointsLabel: UILabel!
     @IBOutlet weak var ratedTimesLabel: UILabel!
     @IBOutlet weak var logoTextfield: UITextField!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var testSlider: UISlider!
-    @IBAction func homeButton(sender: AnyObject) {
-        self.navigationController?.navigationBar.hidden = false
-    }
     var receivedBarCode: String = ""
     var receivedItemImageData = NSData()
     var receivedLogoText: String = ""
@@ -48,10 +62,6 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     var receivedMatchingStatus: Int = 0
     var receivedItemUID: String = ""
 
-//    case .unMatch: mode = 0
-//    case .newToUser: mode = 1
-//    case .existingToUser: mode = 2
-    
     @IBOutlet weak var barcodeLabel: UILabel!
     @IBOutlet weak var logoResults: UILabel!
     
@@ -60,17 +70,19 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     var ratedFlavor: Double = 3.0
     var userUID: String = ""
     
-    @IBAction func ratingSegmentor(sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: ratedPoints = 1.0
-        case 1: ratedPoints = 2.0
-        case 2: ratedPoints = 3.0
-        case 3: ratedPoints = 4.0
-        case 4: ratedPoints = 5.0
-        default: break
-        }
-    }
+    @IBOutlet weak var ratingControl: RatingControl!
+    
+//    @IBAction func ratingSegmentor(sender: UISegmentedControl) {
+//        
+//        switch sender.selectedSegmentIndex {
+//        case 0: ratedPoints = 1.0
+//        case 1: ratedPoints = 2.0
+//        case 2: ratedPoints = 3.0
+//        case 3: ratedPoints = 4.0
+//        case 4: ratedPoints = 5.0
+//        default: break
+//        }
+//    }
     
     @IBAction func textureSegmentor(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -97,9 +109,52 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ratingSegmentor: UISegmentedControl!
     @IBOutlet weak var textureSegmentor: UISegmentedControl!
     @IBOutlet weak var flavorSegmentor: UISegmentedControl!
+    @IBOutlet weak var cardBGLabel: UILabel!
+    
+    
+    @IBOutlet weak var loadingSpinnerUI: UIActivityIndicatorView!
+    @IBOutlet weak var loadingMaskView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Set UI
+        
+        self.loadingMaskView.hidden = true
+        self.loadingSpinnerUI.hidden = true
+        
+        self.navigationController?.title = "Lynla"
+        self.navigationController?.navigationBar.backItem?.hidesBackButton = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.blackColor().CGColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSizeMake(0, 1)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+
+        self.cardBGLabel.layer.shadowColor = UIColor.blackColor().CGColor
+        self.cardBGLabel.layer.shadowOpacity = 0.5
+        self.cardBGLabel.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.cardBGLabel.layer.shadowRadius = 2.5
+
+        self.imageView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.imageView.layer.shadowOpacity = 0.5
+        self.imageView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        self.imageView.layer.shadowRadius = 2.5
+
+        testSlider.hidden = true
+        ratingSegmentor.hidden = true
+        
+//        ratingSegmentor.selectedSegmentIndex = (Int(ratedPoints) - 1 )
+        flavorSegmentor.selectedSegmentIndex = (Int(ratedTexture) - 1 )
+        textureSegmentor.selectedSegmentIndex = (Int(ratedFlavor) - 1 )
+        self.ratingControl.rating = Int(ratedPoints)
+        
+        barcodeLabel.text = "Barcode: \(receivedBarCode)"
+        self.imageView.image = UIImage(data: receivedItemImageData)
+        self.logoTextfield.text = receivedLogoText
+        self.avgPointsLabel.hidden = true
+        self.avgTextureLabel.hidden = true
+        self.avgFlavorLabel.hidden = true
         
         // Get userUID
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -109,23 +164,12 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
             getUserKey()
         }
         
+        
         // FIrebase Analytics Event Log
         FIRAnalytics.logEventWithName("complete_analyze", parameters: ["item": receivedLogoText])
         
-        // Set UI
-        self.navigationController?.navigationBar.hidden = true
-        testSlider.hidden = true
-        ratingSegmentor.selectedSegmentIndex = (Int(ratedPoints) - 1 )
-        flavorSegmentor.selectedSegmentIndex = (Int(ratedTexture) - 1 )
-        textureSegmentor.selectedSegmentIndex = (Int(ratedFlavor) - 1 )
-        barcodeLabel.text = "Barcode: \(receivedBarCode)"
-        self.imageView.image = UIImage(data: receivedItemImageData)
-        self.logoTextfield.text = receivedLogoText
-        self.avgPointsLabel.hidden = true
-        self.avgTextureLabel.hidden = true
-        self.avgFlavorLabel.hidden = true
-        print("reci: \(ratedPoints)")
         
+        // Receive matching state
         if receivedMatchingStatus == 0 {
         
             // Unmatch -> user to submit new item
@@ -148,16 +192,24 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
             fatalError("segue fail")
         }
         
+        
         // Move keyboard and view
         logoTextfield.delegate = self
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ImageAnalyticViewController.dismissKeyboard)))
         
-        // Save to cloud button tapped
-        self.saveButton.addTarget(self, action: #selector(self.postToCloudPressed(_:)), forControlEvents: .TouchUpInside)
-        
     }
     
-    func postToCloudPressed(sender: UIButton) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func postToCloudPressed() {
+        
+        self.loadingMaskView.hidden = false
+        self.loadingSpinnerUI.hidden = false
+        self.loadingSpinnerUI.startAnimating()
+        
+        self.ratedPoints = Double(self.ratingControl.rating)
         
         let databaseRef = FIRDatabase.database().reference()
         let postItemRef = databaseRef.child("items").childByAutoId()
@@ -217,13 +269,21 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
         
         let alert = UIAlertController(title: "Lynla!", message: "Thanks for your feedback", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Home", style: UIAlertActionStyle.Default, handler: { action in
-            self.performSegueWithIdentifier("segueToHome", sender: nil)
-            self.navigationController?.navigationBar.hidden = false
+            
+            
+            self.loadingMaskView.hidden = true
+            self.loadingSpinnerUI.hidden = true
+            self.loadingSpinnerUI.stopAnimating()
+            self.performSegueWithIdentifier("segueBackToCaptureForDismissingVC", sender: nil)
 
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+        alert.addAction(UIAlertAction(title: "Go back", style: UIAlertActionStyle.Cancel, handler: { action in
             
+            
+            self.loadingMaskView.hidden = true
+            self.loadingSpinnerUI.hidden = true
+            self.loadingSpinnerUI.stopAnimating()
             
         }))
 
@@ -237,7 +297,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
             self.userUID = user.uid;
             
         } else {
-            self.userUID = "user UID missing"
+            self.userUID = ""
             
         }
     }

@@ -15,8 +15,9 @@ class ItemModel {
     var itemPT: Double
     var itemTX: Double
     var itemFL: Double
+    var itemUID: String
     
-    init(name: String, barcode: String, imageURL: NSURL, itemPT: Double, itemTX: Double, itemFL: Double) {
+    init(name: String, barcode: String, imageURL: NSURL, itemPT: Double, itemTX: Double, itemFL: Double, itemUID: String) {
     
         self.name = name
         self.barcode = barcode
@@ -24,6 +25,7 @@ class ItemModel {
         self.itemPT = itemPT
         self.itemTX = itemTX
         self.itemFL = itemFL
+        self.itemUID = itemUID
         
     }
     

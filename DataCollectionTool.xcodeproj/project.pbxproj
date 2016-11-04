@@ -15,6 +15,7 @@
 		753A57881D991C8B001A087E /* DataCollectionTool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 753A57861D991C8B001A087E /* DataCollectionTool.xcdatamodeld */; };
 		753A578A1D991C8B001A087E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753A57891D991C8B001A087E /* Assets.xcassets */; };
 		753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A578B1D991C8B001A087E /* LaunchScreen.storyboard */; };
+		753DAB361DC9F1C1004F8192 /* pieChart100.png in Resources */ = {isa = PBXBuildFile; fileRef = 753DAB351DC9F1C1004F8192 /* pieChart100.png */; };
 		754847CE1DB934180030E9B0 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 754847CD1DB934170030E9B0 /* check.png */; };
 		754847D01DB9FC030030E9B0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 754847CF1DB9FC010030E9B0 /* .gitignore */; };
 		754847D21DBCBC8A0030E9B0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */; };
@@ -24,7 +25,17 @@
 		7593BE2D1DC3274E003C7C74 /* beerIcon256.png in Resources */ = {isa = PBXBuildFile; fileRef = 7593BE2C1DC3274E003C7C74 /* beerIcon256.png */; };
 		75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */; };
 		75A36C8C1D9E61C600179C1D /* ImageAnalyticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */; };
+		75BC5ABA1DCB45E900CBB13F /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC5AB91DCB45E900CBB13F /* RatingControl.swift */; };
+		75BC5ABD1DCB638B00CBB13F /* emptyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BC5ABB1DCB638A00CBB13F /* emptyStar.png */; };
+		75BC5ABE1DCB638B00CBB13F /* filledStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 75BC5ABC1DCB638B00CBB13F /* filledStar.png */; };
 		75DB48481D9925D700A791E9 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB48471D9925D700A791E9 /* CaptureViewController.swift */; };
+		75DC70A21DC73E6D005E0A2C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A11DC73E6C005E0A2C /* logout.png */; };
+		75DC70A41DC73ECE005E0A2C /* logout16.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A31DC73ECE005E0A2C /* logout16.png */; };
+		75DC70A61DC74C99005E0A2C /* beerIconWhite64.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */; };
+		75DC70A81DC751D6005E0A2C /* beerAddIcon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */; };
+		75DC70AA1DC79EB9005E0A2C /* beerAddIconRed80.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */; };
+		75DC70AD1DC89CDB005E0A2C /* piechartIconBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70AB1DC89CDB005E0A2C /* piechartIconBig.png */; };
+		75DC70AE1DC89CDB005E0A2C /* starIcon24.png in Resources */ = {isa = PBXBuildFile; fileRef = 75DC70AC1DC89CDB005E0A2C /* starIcon24.png */; };
 		75E208B11DBDAA9700F238DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E208B01DBDAA9700F238DE /* AdSupport.framework */; };
 		75EEDD561DACCFFC004D4D99 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */; };
 		75EEDD571DACCFFC004D4D99 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */; };
@@ -51,6 +62,7 @@
 		753A57891D991C8B001A087E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		753A578C1D991C8B001A087E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		753A578E1D991C8B001A087E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		753DAB351DC9F1C1004F8192 /* pieChart100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieChart100.png; sourceTree = "<group>"; };
 		754847CD1DB934170030E9B0 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		754847CF1DB9FC010030E9B0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +72,17 @@
 		7593BE2C1DC3274E003C7C74 /* beerIcon256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerIcon256.png; sourceTree = "<group>"; };
 		75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A36C8B1D9E61C600179C1D /* ImageAnalyticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyticViewController.swift; sourceTree = "<group>"; };
+		75BC5AB91DCB45E900CBB13F /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		75BC5ABB1DCB638A00CBB13F /* emptyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyStar.png; sourceTree = "<group>"; };
+		75BC5ABC1DCB638B00CBB13F /* filledStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filledStar.png; sourceTree = "<group>"; };
 		75DB48471D9925D700A791E9 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
+		75DC70A11DC73E6C005E0A2C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		75DC70A31DC73ECE005E0A2C /* logout16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout16.png; sourceTree = "<group>"; };
+		75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerIconWhite64.png; sourceTree = "<group>"; };
+		75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerAddIcon80.png; sourceTree = "<group>"; };
+		75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beerAddIconRed80.png; sourceTree = "<group>"; };
+		75DC70AB1DC89CDB005E0A2C /* piechartIconBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piechartIconBig.png; sourceTree = "<group>"; };
+		75DC70AC1DC89CDB005E0A2C /* starIcon24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starIcon24.png; sourceTree = "<group>"; };
 		75E208B01DBDAA9700F238DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		75EEDD531DACCFFB004D4D99 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		75EEDD541DACCFFC004D4D99 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -124,9 +146,19 @@
 				753A577F1D991C8B001A087E /* AppDelegate.swift */,
 				753A57831D991C8B001A087E /* Main.storyboard */,
 				753A57891D991C8B001A087E /* Assets.xcassets */,
+				75DC70A71DC751D6005E0A2C /* beerAddIcon80.png */,
+				75DC70A91DC79EB9005E0A2C /* beerAddIconRed80.png */,
+				75DC70AB1DC89CDB005E0A2C /* piechartIconBig.png */,
+				753DAB351DC9F1C1004F8192 /* pieChart100.png */,
+				75DC70AC1DC89CDB005E0A2C /* starIcon24.png */,
+				75DC70A31DC73ECE005E0A2C /* logout16.png */,
+				75DC70A11DC73E6C005E0A2C /* logout.png */,
 				754847CD1DB934170030E9B0 /* check.png */,
+				75DC70A51DC74C99005E0A2C /* beerIconWhite64.png */,
 				7593BE2A1DC32746003C7C74 /* beerIcon.png */,
 				7593BE2C1DC3274E003C7C74 /* beerIcon256.png */,
+				75BC5ABB1DCB638A00CBB13F /* emptyStar.png */,
+				75BC5ABC1DCB638B00CBB13F /* filledStar.png */,
 				753A578B1D991C8B001A087E /* LaunchScreen.storyboard */,
 				753A578E1D991C8B001A087E /* Info.plist */,
 				75A36C681D9A68DB00179C1D /* GoogleService-Info.plist */,
@@ -145,6 +177,7 @@
 				754847D11DBCBC8A0030E9B0 /* ContainerViewController.swift */,
 				7593BE261DC05385003C7C74 /* ChartSetting.swift */,
 				7593BE281DC0B13F003C7C74 /* BubbleGraph.swift */,
+				75BC5AB91DCB45E900CBB13F /* RatingControl.swift */,
 			);
 			path = DataCollectionTool;
 			sourceTree = "<group>";
@@ -224,14 +257,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75DC70A81DC751D6005E0A2C /* beerAddIcon80.png in Resources */,
 				7593BE2B1DC32746003C7C74 /* beerIcon.png in Resources */,
 				753A578D1D991C8B001A087E /* LaunchScreen.storyboard in Resources */,
+				753DAB361DC9F1C1004F8192 /* pieChart100.png in Resources */,
+				75DC70AA1DC79EB9005E0A2C /* beerAddIconRed80.png in Resources */,
+				75BC5ABD1DCB638B00CBB13F /* emptyStar.png in Resources */,
 				754847CE1DB934180030E9B0 /* check.png in Resources */,
 				75A36C691D9A68DB00179C1D /* GoogleService-Info.plist in Resources */,
 				753A578A1D991C8B001A087E /* Assets.xcassets in Resources */,
+				75DC70AE1DC89CDB005E0A2C /* starIcon24.png in Resources */,
 				754847D01DB9FC030030E9B0 /* .gitignore in Resources */,
 				7593BE2D1DC3274E003C7C74 /* beerIcon256.png in Resources */,
+				75DC70AD1DC89CDB005E0A2C /* piechartIconBig.png in Resources */,
 				753A57851D991C8B001A087E /* Main.storyboard in Resources */,
+				75DC70A41DC73ECE005E0A2C /* logout16.png in Resources */,
+				75BC5ABE1DCB638B00CBB13F /* filledStar.png in Resources */,
+				75DC70A61DC74C99005E0A2C /* beerIconWhite64.png in Resources */,
+				75DC70A21DC73E6D005E0A2C /* logout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +362,7 @@
 				7534456C1DA7A46900827449 /* ItemDataModel.swift in Sources */,
 				75EEDD601DAF99D7004D4D99 /* PresentItemViewController.swift in Sources */,
 				7534456A1DA65CA200827449 /* ListTableViewCell.swift in Sources */,
+				75BC5ABA1DCB45E900CBB13F /* RatingControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
