@@ -147,6 +147,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
 //        ratingSegmentor.selectedSegmentIndex = (Int(ratedPoints) - 1 )
         flavorSegmentor.selectedSegmentIndex = (Int(ratedTexture) - 1 )
         textureSegmentor.selectedSegmentIndex = (Int(ratedFlavor) - 1 )
+        self.ratingControl.rating = Int(ratedPoints)
         
         barcodeLabel.text = "Barcode: \(receivedBarCode)"
         self.imageView.image = UIImage(data: receivedItemImageData)
@@ -277,7 +278,7 @@ class ImageAnalyticViewController: UIViewController, UITextFieldDelegate {
 
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+        alert.addAction(UIAlertAction(title: "Go back", style: UIAlertActionStyle.Cancel, handler: { action in
             
             
             self.loadingMaskView.hidden = true

@@ -151,7 +151,7 @@ class ContainerViewController: UIViewController {
                     
                     let barcode = snapshot.key
                                         
-                    let item = ItemModel(name: name, barcode: barcode, imageURL: imageURL!, itemPT: itemPT, itemTX: itemTX, itemFL: itemFL)
+                    let item = ItemModel(name: name, barcode: barcode, imageURL: imageURL!, itemPT: itemPT, itemTX: itemTX, itemFL: itemFL, itemUID: itemUID)
                     self.items.append(item)
                     
                     dispatch_async(dispatch_get_main_queue(), {

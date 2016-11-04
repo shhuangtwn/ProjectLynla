@@ -11,7 +11,7 @@ import UIKit
 class RatingControl: UIView {
     // MARK: Properties
     
-    var rating = 1 {
+    var rating = 3 {
         didSet {
             setNeedsLayout()
         }

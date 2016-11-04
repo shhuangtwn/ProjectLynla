@@ -21,6 +21,15 @@ class ListTableViewController: UITableViewController {
     var totalTexturePoints: Double = 0.0
     var totalFlavorPoints: Double = 0.0
     
+    var sendingBarode: String = ""
+    var sendingItemImageURL = NSURL()
+    var sendingLogoText: String = ""
+    var sendingMatchingStatus: Int = 2
+    var sendingItemUID: String = ""
+    var sendingPoints: Double = 3.0
+    var sendingTexture: Double = 3.0
+    var sendingFlavor: Double = 3.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +38,8 @@ class ListTableViewController: UITableViewController {
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList",name:"reloadList", object: nil)
 //        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
 
+        tableView.separatorStyle = .None        
+        
     }
     
     func loadList(notification: NSNotification){
@@ -42,12 +53,29 @@ class ListTableViewController: UITableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let rowIndex = indexPath.row
+        
+        sendingBarode = items[rowIndex].barcode
+        sendingItemImageURL = items[rowIndex].imageURL
+        sendingLogoText = items[rowIndex].name
+        sendingItemUID = items[rowIndex].itemUID
+        sendingPoints = items[rowIndex].itemPT
+        sendingTexture = items[rowIndex].itemTX
+        sendingFlavor = items[rowIndex].itemFL
+        
+        performSegueWithIdentifier("modalSegueToItem", sender: nil)
+        
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,forIndexPath: indexPath) as! ListTableViewCell
         
-        cell.itemImageView.image = UIImage(named: "beerIcon")
+        cell.itemImageView.image = nil
+        //UIImage(named: "beerIcon")
         
     }
     
@@ -85,6 +113,26 @@ class ListTableViewController: UITableViewController {
         cell.itemImageView.hnk_setImageFromURL(item.imageURL)
         
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "modalSegueToItem" {
+            
+            let destinationViewController = segue.destinationViewController as! PresentItemViewController;
+            destinationViewController.receivedItemImageURL = sendingItemImageURL
+            destinationViewController.receivedBarCode = sendingBarode
+            destinationViewController.receivedItemUID = sendingItemUID
+            destinationViewController.receivedLogoText = sendingLogoText
+            
+            destinationViewController.ratedPoints = sendingPoints
+            destinationViewController.ratedTexture = sendingTexture
+            destinationViewController.ratedFlavor = sendingFlavor
+            
+            destinationViewController.receivedMatchingStatus = sendingMatchingStatus
+            
+        }
+        
     }
     
 }
