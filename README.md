@@ -33,5 +33,5 @@ Lynla is a beer scanning app which allows you to record the great beers you have
 
 #Contact
 Shao-Hang Huang
-https://tw.linkedin.com/in/shao-hang-steven-huang-69268416
-shhuangtwn@gmail.com
+<br>https://tw.linkedin.com/in/shao-hang-steven-huang-69268416
+<br>shhuangtwn@gmail.com
