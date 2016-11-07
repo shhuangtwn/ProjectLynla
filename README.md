@@ -8,10 +8,10 @@ Lynla is a beer scanning app which allows you to record the great beers you have
 * Personal taste recording and analyzing
 
 #Screenshot
-![](https://firebasestorage.googleapis.com/v0/b/projectbeer-985cf.appspot.com/o/app_screenshot%2FLynla01.png?alt=media&token=03bad56e-ffa0-4a8c-a93b-aaa3888a7d40)
-![](https://firebasestorage.googleapis.com/v0/b/projectbeer-985cf.appspot.com/o/app_screenshot%2FLynla02.png?alt=media&token=34e0805a-aa32-4cd9-82a3-b9d978926290)
-![](https://firebasestorage.googleapis.com/v0/b/projectbeer-985cf.appspot.com/o/app_screenshot%2FLynla03.png?alt=media&token=2bb84ee7-9b56-47e1-8199-13293993d935)
-![](https://firebasestorage.googleapis.com/v0/b/projectbeer-985cf.appspot.com/o/app_screenshot%2FLynla04.png?alt=media&token=745e16d5-c937-4d10-9e52-c6fded2b0028)
+![](https://github.com/shhuangtwn/ProjectLynla/blob/master/Screenshots/Lynla01.png)
+![](https://github.com/shhuangtwn/ProjectLynla/blob/master/Screenshots/Lynla02.png)
+![](https://github.com/shhuangtwn/ProjectLynla/blob/master/Screenshots/Lynla03.png)
+![](https://github.com/shhuangtwn/ProjectLynla/blob/master/Screenshots/Lynla04.png)
 
 #Requirement
 * iOS 9.3+
