@@ -457,8 +457,8 @@
                                         <color key="tintColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="K7F-SD-UGU"/>
                                                 <exclude reference="DiL-u4-8on"/>
+                                                <exclude reference="K7F-SD-UGU"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1084,14 +1084,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBq-Lx-z1B">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBq-Lx-z1B">
                                 <rect key="frame" x="15" y="207" width="570" height="378"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHP-is-lmy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mHP-is-lmy">
                                 <rect key="frame" x="250" y="134" width="100" height="133"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mHP-is-lmy" secondAttribute="height" multiplier="3:4" id="AeS-e3-Qic"/>
@@ -1148,7 +1148,7 @@
                                     </mask>
                                 </variation>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Texture:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjq-BY-Ozp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Texture:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjq-BY-Ozp">
                                 <rect key="frame" x="30" y="466" width="65" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="XJu-Vr-rbN"/>
@@ -1158,7 +1158,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Y-cb-Qpc">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Y-cb-Qpc">
                                 <rect key="frame" x="30" y="502" width="540" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="Bk1-Ds-ZIP"/>
@@ -1182,7 +1182,7 @@
                                     <action selector="textureSegmentor:" destination="UUa-iI-56r" eventType="valueChanged" id="6CL-2o-lr0"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Flavor:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-vo-ZR1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flavor:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-vo-ZR1">
                                 <rect key="frame" x="30" y="382" width="65" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="iYI-7m-UA7"/>
@@ -1198,7 +1198,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="RQi-si-HLW">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="RQi-si-HLW">
                                 <rect key="frame" x="30" y="418" width="540" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Qna-iv-nIz"/>
@@ -1220,7 +1220,7 @@
                                     <action selector="flavorSegmentor:" destination="UUa-iI-56r" eventType="valueChanged" id="Uag-3m-ohi"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3jm-31-ehc" customClass="RatingControl" customModule="DataCollectionTool" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jm-31-ehc" customClass="RatingControl" customModule="DataCollectionTool" customModuleProvider="target">
                                 <rect key="frame" x="230" y="292" width="140" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1228,7 +1228,7 @@
                                     <constraint firstAttribute="height" constant="20" id="ua9-oh-1DE"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in beer name here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6mq-qS-DOB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in beer name here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6mq-qS-DOB">
                                 <rect key="frame" x="30" y="332" width="540" height="30"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1258,7 +1258,6 @@
                         <constraints>
                             <constraint firstItem="CDU-ZP-Fhx" firstAttribute="top" secondItem="PBq-Lx-z1B" secondAttribute="bottom" constant="15" id="2Jv-Xh-9Au"/>
                             <constraint firstItem="6mq-qS-DOB" firstAttribute="leading" secondItem="PBq-Lx-z1B" secondAttribute="leading" constant="15" id="3MR-03-jrY"/>
-                            <constraint firstItem="CDU-ZP-Fhx" firstAttribute="top" secondItem="3jm-31-ehc" secondAttribute="bottom" constant="27" id="4fF-uk-TlH"/>
                             <constraint firstItem="nfw-ZH-TzN" firstAttribute="leading" secondItem="PBq-Lx-z1B" secondAttribute="leading" constant="30" id="8ge-dg-L3p"/>
                             <constraint firstItem="nfw-ZH-TzN" firstAttribute="trailing" secondItem="PBq-Lx-z1B" secondAttribute="trailing" constant="-30" id="A7s-wu-nzc"/>
                             <constraint firstItem="s7Y-Of-snf" firstAttribute="top" secondItem="gpi-tq-xVY" secondAttribute="bottom" id="DEB-X9-SZT"/>

@@ -230,7 +230,7 @@
 				TargetAttributes = {
 					753A577B1D991C8A001A087E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Q6933N9Z5M;
+						DevelopmentTeam = 4C6ZH29U7C;
 					};
 				};
 			};
@@ -490,7 +490,7 @@
 				INFOPLIST_FILE = DataCollectionTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = shhuang.DataCollectionTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shhuang.lynla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7";
@@ -514,7 +514,7 @@
 				INFOPLIST_FILE = DataCollectionTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = shhuang.DataCollectionTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shhuang.lynla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7";
