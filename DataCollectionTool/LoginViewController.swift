@@ -19,13 +19,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     
     @IBAction func segueToHome(segue: UIStoryboardSegue) {
-        
         viewDidLoad()
-
     }
 
     @IBOutlet weak var loginSpinner: UIActivityIndicatorView!
-    
+    @IBOutlet weak var createNewAccountButton: UIButton!
+    @IBOutlet weak var loginWithEmailButton: UIButton!
     @IBOutlet weak var loginWithoutFBButton: UIButton!
     @IBAction func loginWithoutFBButton(sender: UIButton) {
     
@@ -36,6 +35,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     }
     
+    @IBAction func createNewAccount(sender: UIButton) {
+    
+    
+    
+    }
+    
+    @IBAction func loginWithEmail(sender: UIButton) {
+    
+    
+    
+    }
+    
+    
 //    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     
     override func viewDidLoad() {
@@ -43,14 +55,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.loginWithoutFBButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.loginWithoutFBButton.layer.borderWidth = 1
+        self.loginWithoutFBButton.layer.cornerRadius = 2
         
         self.loginButton.hidden = true
         self.loginButton.layer.shadowColor = UIColor.blackColor().CGColor
         self.loginButton.layer.shadowOpacity = 0.5
+        self.loginButton.layer.cornerRadius = 2
         self.loginButton.layer.shadowOffset = CGSizeMake(0.0, 1.0)
         self.loginButton.layer.shadowRadius = 1.5
         let path = UIBezierPath(roundedRect: self.loginButton.bounds, cornerRadius: 2).CGPath
         self.loginButton.layer.shadowPath = path
+        
+//        self.loginWithEmailButton.hidden = true
+//        self.loginWithEmailButton.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.loginWithEmailButton.layer.cornerRadius = 2
+//        self.loginWithEmailButton.layer.shadowOpacity = 0.5
+//        self.loginWithEmailButton.layer.shadowOffset = CGSizeMake(0.0, 1.0)
+//        self.loginWithEmailButton.layer.shadowRadius = 1.5
+//        let path2 = UIBezierPath(roundedRect: self.loginWithEmailButton.bounds, cornerRadius: 2).CGPath
+//        self.loginWithEmailButton.layer.shadowPath = path2
+        
+        self.loginWithEmailButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.loginWithEmailButton.layer.borderWidth = 1
+        self.loginWithEmailButton.layer.cornerRadius = 2
         
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if user != nil {
@@ -70,7 +97,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 self.view.addSubview(self.loginButton)
                 
                 self.loginButton.hidden = false
-                
+                self.loginWithEmailButton.hidden = false
+
             }
         }
     }
@@ -79,16 +107,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         print("user login")
         self.loginButton.hidden = true
+        self.loginWithEmailButton.hidden = true
+
         loginSpinner.startAnimating()
         
         if (error != nil) {
             // handle error
             self.loginButton.hidden = false
+            self.loginWithEmailButton.hidden = false
+
             loginSpinner.stopAnimating()
             
         } else if (result.isCancelled) {
             //cancel case
             self.loginButton.hidden = false
+            self.loginWithEmailButton.hidden = false
+
             loginSpinner.stopAnimating()
             
         } else {
