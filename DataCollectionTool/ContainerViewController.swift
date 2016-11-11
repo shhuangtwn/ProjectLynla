@@ -84,9 +84,10 @@ class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.nameLabel.text = "Welcome to Lynla"
         getUserKey()
-    
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -116,8 +117,9 @@ class ContainerViewController: UIViewController {
         self.profileImageView.layer.borderWidth = 1
         
         self.containerList.backgroundColor = UIColor(red: 239.0/255.0, green: 62.0/255.0, blue: 54.0/255.0, alpha: 1.0)
-        self.tutorialInfoLabel.hidden = true
-        self.spinnerUI.startAnimating()
+        
+        self.spinnerUI.hidden = true
+
         fetchItems()
 
         
@@ -131,6 +133,9 @@ class ContainerViewController: UIViewController {
         
         // Get user drank items
         database.child("user_feedbacks").queryOrderedByChild("user_uid").queryEqualToValue(userUID).observeEventType(.ChildAdded , withBlock: { snapshot in
+            
+            self.spinnerUI.hidden = false
+            self.spinnerUI.startAnimating()
             
             guard
                 let itemUID = snapshot.value!["item_uid"] as? String,
@@ -162,6 +167,8 @@ class ContainerViewController: UIViewController {
                         self.ratedNumberLabel.text = String(self.ratedItems)
                         self.notifyToReloadList()
                         self.updateAvgNumbers(self.items)
+                        self.tutorialInfoLabel.hidden = true
+
                     })
                     
                 })
@@ -233,14 +240,16 @@ class ContainerViewController: UIViewController {
     func getUserKey() {
         if let user = FIRAuth.auth()?.currentUser {
             self.nameLabel.text = user.displayName
-            //            let email = user.email
-            guard let userPhotoURL = user.photoURL else {return}
-            self.profileImageView.hnk_setImageFromURL(userPhotoURL)
+            if let userPhotoURL = user.photoURL {
+                self.profileImageView.hnk_setImageFromURL(userPhotoURL)
+            }
             self.userUID = user.uid
             
         } else {
             // No user is signed in.
             self.userUID = "user UID missing"
+            self.nameLabel.text = "Welcome to Lynla"
+            print(self.userUID)
         }
     }
     

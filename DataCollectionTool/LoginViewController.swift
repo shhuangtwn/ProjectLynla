@@ -14,7 +14,7 @@ import FBSDKLoginKit
 import Crashlytics
 
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     
@@ -22,6 +22,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         viewDidLoad()
     }
 
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     @IBOutlet weak var loginSpinner: UIActivityIndicatorView!
     @IBOutlet weak var createNewAccountButton: UIButton!
     @IBOutlet weak var loginWithEmailButton: UIButton!
@@ -37,14 +40,34 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBAction func createNewAccount(sender: UIButton) {
     
-    
+        alertForCreateAccount()
     
     }
     
     @IBAction func loginWithEmail(sender: UIButton) {
-    
-    
-    
+        
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        
+        self.loginWithEmailButton.hidden = true
+        self.loginSpinner.hidden = false
+        self.loginSpinner.startAnimating()
+        
+        if email != "" && password != "" {
+            FIRAuth.auth()?.signInWithEmail(email!, password: password!, completion: { (user, error) in
+                
+                self.saveUserToNSUserDefaults()
+                
+            })
+        } else {
+            
+            signupErrorAlert("Oops!", message: "Please make sure you entered the right email and password")
+            
+            self.loginWithEmailButton.hidden = false
+            self.loginSpinner.hidden = true
+            self.loginSpinner.stopAnimating()
+            
+        }
     }
     
     
@@ -101,6 +124,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
             }
         }
+        
+        // Move keyboard and view
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard)))
+        
     }
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
@@ -143,6 +172,125 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         
         try! FIRAuth.auth()!.signOut()
+        
+    }
+    
+    
+    func alertForCreateAccount() {
+        
+        var usernameCreated: String = ""
+        var emailCreated: String = ""
+        var passwordCreated: String = ""
+       
+        
+        let alert = UIAlertController(title: "Register New Account", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Register", style: UIAlertActionStyle.Default, handler: { action in
+            
+            let usernameTextField = alert.textFields![0] as UITextField
+            let emailTextField = alert.textFields![1] as UITextField
+            let passwardTextField = alert.textFields![2] as UITextField
+            
+            if let name = usernameTextField.text {usernameCreated = name}
+            if let email = emailTextField.text {emailCreated = email}
+            if let password = passwardTextField.text {passwordCreated = password}
+            
+            if usernameCreated.isBlank != true && emailCreated.isEmail && passwordCreated.isBlank != true {
+
+                FIRAuth.auth()?.createUserWithEmail(emailCreated, password: passwordCreated, completion: { (user, error) in
+                    
+                    self.loginButton.hidden = true
+                    self.loginWithEmailButton.hidden = true
+                    self.loginSpinner.startAnimating()
+                    
+                    if error != nil {
+                        self.signupErrorAlert("Oops!", message: "Please make sure you have entered the correct format")
+                       
+                        self.loginButton.hidden = false
+                        self.loginWithEmailButton.hidden = false
+                        self.loginSpinner.hidden = true
+                        
+                    } else {
+                        
+                        FIRAuth.auth()?.signInWithEmail(emailCreated, password: passwordCreated, completion: { (user, error) in
+                            
+                            if error != nil {
+                            
+                                self.loginButton.hidden = false
+                                self.loginWithEmailButton.hidden = false
+                                self.loginSpinner.hidden = true
+                                
+                                self.signupErrorAlert("Oops!", message: "Please try to login again")
+                                
+                            } else {
+                                
+                                self.loginButton.hidden = false
+                                self.loginWithEmailButton.hidden = false
+                                self.loginSpinner.hidden = true
+                                
+                                self.addUsernameToAccount(usernameCreated)
+                            
+                            }
+                            
+                        })
+                        
+                    }
+                    
+                })
+                
+            } else {
+            
+                self.signupErrorAlert("Oops!", message: "Don't forget to enter your email, password, and username properly")
+                
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+        }))
+        
+        alert.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Username"
+        }
+        alert.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Your_email@mail.com"
+        }
+        alert.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Password"
+            textField.secureTextEntry = true
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    func signupErrorAlert(title: String, message: String) {
+        
+        // Called upon signup error to let the user know signup didn't work.
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func addUsernameToAccount(username: String) {
+    
+        let user = FIRAuth.auth()?.currentUser
+        if let user = user {
+            let changeRequest = user.profileChangeRequest()
+            
+            changeRequest.displayName = username
+            
+            changeRequest.commitChangesWithCompletion { error in
+                if error != nil {
+                    self.signupErrorAlert("Oops!", message: "Cannot set username")
+                } else {
+                    
+                    self.postUserInitDataToCloud(user.uid, totalItems: 0, avgPT: 3.0, avgTX: 3.0, avgFL: 3.0)
+                    self.saveUserToNSUserDefaults()
+                }
+            }
+        }
         
     }
     
@@ -239,4 +387,55 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         return uuidString
     }
 
+    // Keyboard setup
+    func dismissKeyboard() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+
+        return true
+    }
+    
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        animateViewMoving(true, moveValue: 100)
+//    }
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        animateViewMoving(false, moveValue: 100)
+//    }
+//    
+//    func animateViewMoving (up:Bool, moveValue :CGFloat){
+//        let movementDuration:NSTimeInterval = 0.3
+//        let movement:CGFloat = ( up ? -moveValue : moveValue)
+//        UIView.beginAnimations( "animateView", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(movementDuration )
+//        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+//        UIView.commitAnimations()
+//    }
+    
+}
+
+extension String {
+    
+    //To check text field or String is blank or not
+    var isBlank: Bool {
+        get {
+            let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            return trimmed.isEmpty
+        }
+    }
+    
+    //Validate Email
+    var isEmail: Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", options: .CaseInsensitive)
+            return regex.firstMatchInString(self, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count)) != nil
+        } catch {
+            return false
+        }
+    }
 }

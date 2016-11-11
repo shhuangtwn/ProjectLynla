@@ -127,9 +127,16 @@ class AnalyzingViewController: UIViewController {
         
         // See if matched item in user's list
         database.child("user_feedbacks").queryOrderedByChild("user_uid").queryEqualToValue(uuid).observeSingleEventOfType(.Value , withBlock: { snapshot in
-            
-            guard let userFeedbacks = snapshot.value as? NSDictionary else{
-                fatalError("not NSDict")
+                        
+            guard let userFeedbacks = snapshot.value as? NSDictionary else {
+                
+                self.matchingStatus = .newToUser
+                self.infoLabel.text = "Found a match!"
+                self.spinnerUI.stopAnimating()
+                self.moveToItemPage()
+
+                
+                return
             }
             
             let valueArray = userFeedbacks.allValues
