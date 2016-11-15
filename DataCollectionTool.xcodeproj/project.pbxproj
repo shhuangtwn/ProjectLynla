@@ -55,7 +55,7 @@
 		753445671DA6482C00827449 /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		753445691DA65CA200827449 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		7534456B1DA7A46900827449 /* ItemDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDataModel.swift; sourceTree = "<group>"; };
-		753A577C1D991C8A001A087E /* DataCollectionTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCollectionTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		753A577C1D991C8A001A087E /* Lynla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lynla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		753A577F1D991C8B001A087E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		753A57841D991C8B001A087E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		753A57871D991C8B001A087E /* DataCollectionTool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCollectionTool.xcdatamodel; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		753A577D1D991C8A001A087E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				753A577C1D991C8A001A087E /* DataCollectionTool.app */,
+				753A577C1D991C8A001A087E /* Lynla.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 			);
 			name = DataCollectionTool;
 			productName = DataCollectionTool;
-			productReference = 753A577C1D991C8A001A087E /* DataCollectionTool.app */;
+			productReference = 753A577C1D991C8A001A087E /* Lynla.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -492,7 +492,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shhuang.lynla;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lynla;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -503,7 +503,7 @@
 			baseConfigurationReference = 3DD1B524C44E3F35ED623EC1 /* Pods-DataCollectionTool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -517,7 +517,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shhuang.lynla;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lynla;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7";
 			};

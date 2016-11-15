@@ -16,6 +16,7 @@ import Crashlytics
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
+//    @IBOutlet weak var loginButton: FBSDKLoginButton!
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     
     @IBAction func segueToHome(segue: UIStoryboardSegue) {
@@ -73,14 +74,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
 //    var loginButton: FBSDKLoginButton = FBSDKLoginButton()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
-        self.loginWithoutFBButton.layer.borderColor = UIColor.whiteColor().CGColor
-        self.loginWithoutFBButton.layer.borderWidth = 1
-        self.loginWithoutFBButton.layer.cornerRadius = 2
-        
-        self.loginButton.hidden = true
         self.loginButton.layer.shadowColor = UIColor.blackColor().CGColor
         self.loginButton.layer.shadowOpacity = 0.5
         self.loginButton.layer.cornerRadius = 2
@@ -88,6 +84,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         self.loginButton.layer.shadowRadius = 1.5
         let path = UIBezierPath(roundedRect: self.loginButton.bounds, cornerRadius: 2).CGPath
         self.loginButton.layer.shadowPath = path
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.loginButton.hidden = true
+
+        
+        self.loginWithoutFBButton.layer.borderColor = UIColor.whiteColor().CGColor
+        self.loginWithoutFBButton.layer.borderWidth = 1
+        self.loginWithoutFBButton.layer.cornerRadius = 2
+        
         
 //        self.loginWithEmailButton.hidden = true
 //        self.loginWithEmailButton.layer.shadowColor = UIColor.blackColor().CGColor

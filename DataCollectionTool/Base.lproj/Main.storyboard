@@ -11,7 +11,7 @@
         <!--2. Take a picture...-->
         <scene sceneID="hNM-F2-VA5">
             <objects>
-                <viewController id="2Sg-FU-yh9" customClass="CameraViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2Sg-FU-yh9" customClass="CameraViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qlZ-WU-HoV"/>
                         <viewControllerLayoutGuide type="bottom" id="mr7-Ax-WFN"/>
@@ -69,7 +69,7 @@
         <!--Find the barcode-->
         <scene sceneID="xXO-wn-aTF">
             <objects>
-                <viewController storyboardIdentifier="CaptureView" title="Find the barcode" id="cIm-RY-m85" customClass="CaptureViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CaptureView" title="Find the barcode" id="cIm-RY-m85" customClass="CaptureViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nCf-iv-4AJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Jog-bP-6jG"/>
@@ -115,7 +115,7 @@
         <!--Login View Controller-->
         <scene sceneID="tXK-WQ-6kx">
             <objects>
-                <viewController storyboardIdentifier="LoginView" id="rvr-jR-6HF" customClass="LoginViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="rvr-jR-6HF" customClass="LoginViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xcp-6F-gIr"/>
                         <viewControllerLayoutGuide type="bottom" id="P9V-M4-tSs"/>
@@ -175,8 +175,8 @@
                                     <action selector="loginWithoutFBButton:" destination="rvr-jR-6HF" eventType="touchUpInside" id="Ahv-X4-GTs"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWv-Tg-rrw" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="180" y="446" width="241" height="40"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWv-Tg-rrw" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="339" y="436" width="241" height="40"/>
                                 <color key="backgroundColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -242,14 +242,25 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDJ-vZ-Ac5" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="180" y="440" width="241" height="46"/>
+                                <color key="backgroundColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="241" id="boy-If-XfN"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.16862745100000001" green="0.2901960784" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GRP-E7-BeI" firstAttribute="centerX" secondItem="QLk-t6-2i6" secondAttribute="centerX" id="20M-SU-fxC"/>
                             <constraint firstItem="0KE-Eh-SY9" firstAttribute="leading" secondItem="nCS-gi-0hq" secondAttribute="trailing" constant="5" id="2Ns-0V-Igw"/>
+                            <constraint firstItem="aDJ-vZ-Ac5" firstAttribute="top" secondItem="AtB-jY-R7c" secondAttribute="bottom" constant="8" id="37n-XK-7Nb"/>
                             <constraint firstItem="lDH-cZ-nwZ" firstAttribute="centerX" secondItem="QLk-t6-2i6" secondAttribute="centerX" id="4bN-Vg-xMR"/>
                             <constraint firstItem="GRP-E7-BeI" firstAttribute="leading" secondItem="QLk-t6-2i6" secondAttribute="leading" constant="15" id="6KN-Ud-Nza"/>
                             <constraint firstItem="NWR-ps-pwh" firstAttribute="centerX" secondItem="QLk-t6-2i6" secondAttribute="centerX" id="6kB-Gk-hoI"/>
+                            <constraint firstItem="aDJ-vZ-Ac5" firstAttribute="centerX" secondItem="QLk-t6-2i6" secondAttribute="centerX" id="8Qd-yA-XJr"/>
+                            <constraint firstItem="bj2-je-kHo" firstAttribute="top" secondItem="aDJ-vZ-Ac5" secondAttribute="bottom" constant="8" id="Box-rY-5fb"/>
                             <constraint firstItem="dG3-Bs-eYy" firstAttribute="centerX" secondItem="QLk-t6-2i6" secondAttribute="centerX" id="Cxz-hd-EFx"/>
                             <constraint firstItem="lDH-cZ-nwZ" firstAttribute="top" secondItem="dG3-Bs-eYy" secondAttribute="bottom" constant="30" id="HEO-SK-5uD"/>
                             <constraint firstItem="bj2-je-kHo" firstAttribute="top" secondItem="XWv-Tg-rrw" secondAttribute="bottom" constant="8" id="IYu-zh-KZU"/>
@@ -286,7 +297,7 @@
                     <connections>
                         <outlet property="createNewAccountButton" destination="fDe-kS-NeP" id="HzN-rv-iew"/>
                         <outlet property="emailTextField" destination="lDH-cZ-nwZ" id="iRa-ka-5xW"/>
-                        <outlet property="loginButton" destination="XWv-Tg-rrw" id="HAj-Pn-5E1"/>
+                        <outlet property="loginButton" destination="aDJ-vZ-Ac5" id="VzV-tG-WhR"/>
                         <outlet property="loginSpinner" destination="Rse-sg-FNE" id="vP6-Cf-IyG"/>
                         <outlet property="loginWithEmailButton" destination="NWR-ps-pwh" id="sks-zc-B2y"/>
                         <outlet property="loginWithoutFBButton" destination="bj2-je-kHo" id="rAw-fi-BJF"/>
@@ -300,7 +311,7 @@
         <!--List Table View Controller-->
         <scene sceneID="XBV-2v-guc">
             <objects>
-                <tableViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="1vc-t7-vFP" customClass="ListTableViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="1vc-t7-vFP" customClass="ListTableViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="tMg-ia-9JW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,7 +319,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.87843137250000003" green="0.86666666670000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.87843137250000003" green="0.86666666670000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="86" id="i0U-et-0eS" customClass="ListTableViewCell" customModule="DataCollectionTool" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="86" id="i0U-et-0eS" customClass="ListTableViewCell" customModule="Lynla" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Cell" tableViewCell="i0U-et-0eS" id="j1L-bq-Krz">
@@ -462,7 +473,7 @@
         <!--Title-->
         <scene sceneID="crm-MB-Lsm">
             <objects>
-                <viewController id="K39-Mj-fEY" customClass="PresentItemViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="K39-Mj-fEY" customClass="PresentItemViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XTU-OO-XNS"/>
                         <viewControllerLayoutGuide type="bottom" id="JST-m1-Tz8"/>
@@ -565,7 +576,7 @@
                                             <action selector="flavorSegmentor:" destination="K39-Mj-fEY" eventType="valueChanged" id="kYo-Qi-eR5"/>
                                         </connections>
                                     </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrS-xd-nov" customClass="RatingControl" customModule="DataCollectionTool" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrS-xd-nov" customClass="RatingControl" customModule="Lynla" customModuleProvider="target">
                                         <rect key="frame" x="230" y="254" width="140" height="20"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -724,7 +735,7 @@
         <!--Lynla-->
         <scene sceneID="C57-jA-vZu">
             <objects>
-                <viewController id="AgW-QO-GJf" customClass="ContainerViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AgW-QO-GJf" customClass="ContainerViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qdM-bk-LnY"/>
                         <viewControllerLayoutGuide type="bottom" id="xWM-bo-JdN"/>
@@ -985,7 +996,7 @@
         <!--My Taste-->
         <scene sceneID="wGb-U6-9oF">
             <objects>
-                <viewController id="V8P-B8-36T" customClass="ProfileViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V8P-B8-36T" customClass="ProfileViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F8B-Gg-hZh"/>
                         <viewControllerLayoutGuide type="bottom" id="jSF-O9-WS2"/>
@@ -1141,7 +1152,7 @@
         <!--ImageAnalyticViewController-->
         <scene sceneID="iKY-KH-x6I">
             <objects>
-                <viewController title="ImageAnalyticViewController" id="UUa-iI-56r" customClass="ImageAnalyticViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ImageAnalyticViewController" id="UUa-iI-56r" customClass="ImageAnalyticViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gpi-tq-xVY"/>
                         <viewControllerLayoutGuide type="bottom" id="CDU-ZP-Fhx"/>
@@ -1286,7 +1297,7 @@
                                     <action selector="flavorSegmentor:" destination="UUa-iI-56r" eventType="valueChanged" id="Uag-3m-ohi"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jm-31-ehc" customClass="RatingControl" customModule="DataCollectionTool" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jm-31-ehc" customClass="RatingControl" customModule="Lynla" customModuleProvider="target">
                                 <rect key="frame" x="230" y="292" width="140" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1422,7 +1433,7 @@
         <!--3. Analyzing...-->
         <scene sceneID="u2F-4L-X5E">
             <objects>
-                <viewController id="ZGs-Fi-q2K" customClass="AnalyzingViewController" customModule="DataCollectionTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZGs-Fi-q2K" customClass="AnalyzingViewController" customModule="Lynla" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oOl-Hp-IhI"/>
                         <viewControllerLayoutGuide type="bottom" id="Wyn-uz-sYc"/>

@@ -69,15 +69,14 @@ class ListTableViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let cellIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,forIndexPath: indexPath) as! ListTableViewCell
-        
-        cell.itemImageView.image = nil
-        //UIImage(named: "beerIcon")
-        
-    }
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        let cellIdentifier = "Cell"
+//        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,forIndexPath: indexPath) as! ListTableViewCell
+//        
+//        cell.itemImageView.image = UIImage(named: "beerIcon")
+//        
+//    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -110,6 +109,7 @@ class ListTableViewController: UITableViewController {
         cell.itemPoint.text = "\(String(Int(item.itemPT))) stars"
         cell.itemTexture.text = txString
         cell.itemFlavor.text = flString
+        cell.itemImageView.image = UIImage(named: "beerIcon")
         cell.itemImageView.hnk_setImageFromURL(item.imageURL)
         
         return cell
